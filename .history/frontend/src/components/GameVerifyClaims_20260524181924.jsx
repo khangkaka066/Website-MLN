@@ -31,7 +31,7 @@ const useShareUrl = () => {
   const [url, setUrl] = useState("");
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setUrl(`${window.location.origin}${window.location.pathname}/play`);
+      setUrl(`${window.location.origin}${window.location.pathname}#game`);
     }
   }, []);
   return url;

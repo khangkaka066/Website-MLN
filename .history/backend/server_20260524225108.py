@@ -26,8 +26,6 @@ app: FastAPI = FastAPI(title="AI Verification Card API")
 api_router: APIRouter = APIRouter(prefix="/api")
 
 @app.get("/")
-async def root():
-    return {"message": "AI Verification Card API is running"}
 # ==============================
 # Status check (legacy)
 # ==============================
