@@ -17,7 +17,7 @@ load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
 mongo_url: str = os.environ['MONGO_URL']
-client: AsyncIOMotorClient = AsyncIOMotorClient(mongo_url,  tlsCAFile=certifi.where())
+client: AsyncIOMotorClient = AsyncIOMotorClient(mongo_url,  tlsCAFile=certifi.where(), tlsAllowInvalidCertificates=True)
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
