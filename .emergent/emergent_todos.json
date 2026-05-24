@@ -1,19 +1,19 @@
 [
   {
     "content": "Phase 1: Call design_agent for Playful/Education guidelines",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Phase 1: Build complete landing page (7 sections + interactive game)",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 1: All user stories covered in development",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Phase 2: End-to-end testing via testing_agent_v3",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Phase 2: Fix bugs found by testing agent",
