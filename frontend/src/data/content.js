@@ -8,7 +8,7 @@ export const HERO = {
   subtitle:
     "Bộ thẻ 5 bước giúp bạn dùng nội dung AI trong học thuật một cách tỉnh táo — đặt nền trên hai trụ cột của triết học: thực tiễn và chân lý.",
   ctas: [
-    { id: "start", label: "Chơi game tìm lỗi AI", target: "game", variant: "primary" },
+    { id: "start", label: "Chơi game AI Verification", target: "game", variant: "primary" },
     { id: "steps", label: "Xem 5 bước kiểm chứng", target: "steps", variant: "secondary" },
   ],
   bullets: [
@@ -21,105 +21,150 @@ export const HERO = {
 
 export const NAV_LINKS = [
   { id: "hero", label: "Mở đầu" },
-  { id: "game", label: "Game tìm lỗi" },
+  { id: "game", label: "Game" },
   { id: "theory", label: "Lý thuyết" },
   { id: "steps", label: "5 Bước" },
   { id: "apply", label: "Áp dụng" },
   { id: "compare", label: "Trước / Sau" },
 ];
 
-// Đoạn văn AI có lỗi cho mini-game.
-// Mỗi phần tử là một segment: text thường (kind: 'text') hoặc đoạn có lỗi (kind: 'error').
-// Khi click vào error → hiển thị giải thích.
-const PARAGRAPH_RAW = [
-  { kind: "text", text: "Theo nghiên cứu của " },
-  {
-    kind: "error",
-    id: "err-1",
-    text: "Nguyễn Văn Tuấn (2019) đăng trên tạp chí Vietnam Journal of Artificial Cognition",
-    type: "Nguồn bịa (Fake citation)",
-    explain:
-      "Tạp chí 'Vietnam Journal of Artificial Cognition' không tồn tại trong các cơ sở dữ liệu học thuật (Scopus, Web of Science, Google Scholar). Tên tác giả + năm + tên tạp chí được AI tự ghép lại nghe có vẻ uy tín nhưng không thể tra cứu.",
-    fix: "Tìm trực tiếp trên Google Scholar / arXiv. Nếu không có DOI hoặc link gốc, loại bỏ.",
-  },
-  { kind: "text", text: ", mô hình GPT-4 đạt độ chính xác " },
-  {
-    kind: "error",
-    id: "err-2",
-    text: "99.7%",
-    type: "Số liệu đáng ngờ (Suspicious statistic)",
-    explain:
-      "Một con số quá cụ thể, quá tròn trịa, không có thang đo, không có tập dữ liệu kèm theo. Đây là 'mùi' điển hình của AI hallucination khi bị ép trả lời định lượng.",
-    fix: "Yêu cầu nguồn cụ thể: tập test nào? phương pháp đánh giá? n = bao nhiêu? Không có → bỏ.",
-  },
-  { kind: "text", text: " trong các bài kiểm tra triết học Mác–Lênin. Trong cuốn 'Triết học và Trí tuệ Nhân tạo' (NXB Tri thức, 2022), tác giả " },
-  {
-    kind: "error",
-    id: "err-3",
-    text: "Trần Đức Thảo đã khẳng định",
-    type: "Sai sự kiện lịch sử (Factual error)",
-    explain:
-      "Triết gia Trần Đức Thảo (1917–1993) qua đời từ năm 1993, không thể là tác giả của một cuốn sách xuất bản năm 2022. AI đã ghép một nhân vật uy tín vào một công trình bịa để tăng độ tin cậy.",
-    fix: "Đối chiếu năm mất / năm xuất bản với Wikipedia hoặc thư viện quốc gia. Mâu thuẫn → loại bỏ.",
-  },
-  { kind: "text", text: " rằng " },
-  {
-    kind: "error",
-    id: "err-4",
-    text: "'thực tiễn là tiêu chuẩn duy nhất của chân lý trong kỷ nguyên AI'",
-    type: "Trích dẫn ngụy tạo (Fabricated quote)",
-    explain:
-      "Câu trích này KHÔNG xuất hiện trong bất kỳ công trình thật nào của Trần Đức Thảo. AI đã 'sáng tác' một câu nghe rất triết học bằng cách trộn khái niệm Mác-Lênin với buzzword 'kỷ nguyên AI'.",
-    fix: "Trích dẫn phải tra được nguyên văn từ bản gốc (trang, chương). Không tra được → không dùng.",
-  },
-  { kind: "text", text: ". " },
-  {
-    kind: "error",
-    id: "err-5",
-    text: "Nghiên cứu mới nhất của MIT năm 2024",
-    type: "Nguồn mơ hồ (Vague source)",
-    explain:
-      "'MIT' là một viện lớn với hàng nghìn nghiên cứu mỗi năm. Không có tên tác giả, không có tên bài báo, không có link → đây là cách AI tạo cảm giác uy tín giả.",
-    fix: "Ép AI / tự tìm: tên paper cụ thể, tác giả, DOI, link arXiv. Không có → bỏ.",
-  },
-  { kind: "text", text: " chỉ ra " },
-  {
-    kind: "error",
-    id: "err-6",
-    text: "87% sinh viên Việt Nam sử dụng ChatGPT đã cải thiện điểm trung bình lên 2.3 điểm GPA",
-    type: "Suy luận phi logic (Logic fallacy)",
-    explain:
-      "Hệ thống điểm GPA tại Việt Nam phổ biến là thang 4.0 hoặc 10. 'Tăng 2.3 điểm GPA' nghe khả thi nhưng kết hợp với '87%' không kèm thiết kế nghiên cứu là một mệnh đề rỗng. Mối quan hệ nhân quả (dùng ChatGPT → tăng điểm) cũng chưa được chứng minh.",
-    fix: "Tách 3 câu hỏi: (1) Mẫu nghiên cứu? (2) Thiết kế đối chứng? (3) Tương quan hay nhân quả? Không trả lời được → bỏ.",
-  },
-  { kind: "text", text: "." },
-];
+// ============================================================
+// GAME: "Đạt / Cần kiểm chứng" — claim-by-claim quiz
+// Người chơi quét QR để tham gia trên điện thoại, AI lần lượt
+// đưa ra các câu khẳng định, người chơi chọn "Đạt" (claim ổn)
+// hoặc "Cần kiểm chứng" (claim đáng ngờ, cần áp dụng 5 bước).
+// ============================================================
+export const GAME_INTRO = {
+  title: "AI Verification Quiz",
+  tagline: "Quét QR để tham gia — hoặc chơi luôn tại đây",
+  description:
+    "AI sẽ lần lượt đưa ra các câu khẳng định học thuật. Bạn chọn “Đạt” nếu câu đó đủ tin cậy để dùng trong bài, hoặc “Cần kiểm chứng” nếu bạn nghi ngờ và muốn áp dụng 5 bước.",
+  scanHint: "Mở camera điện thoại, quét mã QR để chơi cùng cả lớp.",
+};
 
-// Stable id for every segment (text segments get auto-generated ids so React keys are stable).
-export const GAME_PARAGRAPH = PARAGRAPH_RAW.map((seg, idx) =>
-  seg.id ? seg : { ...seg, id: `txt-${idx}` }
-);
+export const GAME_CLAIMS = [
+  {
+    id: "claim-1",
+    text:
+      "Sinh viên dùng AI sẽ tăng 300% hiệu quả học tập (Nguyễn, 2024).",
+    answer: "verify", // 'pass' | 'verify'
+    label: "Cần kiểm chứng",
+    why:
+      "Số liệu “300%” quá tròn trịa và rất lớn; tên tác giả “Nguyễn, 2024” mơ hồ, không có tên đầy đủ, không có nơi đăng. Đây là một “ảo giác có vẻ học thuật” điển hình.",
+    fix:
+      "Yêu cầu nguồn cụ thể: tên đầy đủ tác giả, tên tạp chí, DOI, mẫu nghiên cứu n=? Không có → không dùng.",
+    tag: "Số liệu phóng đại",
+  },
+  {
+    id: "claim-2",
+    text:
+      "Triết gia Trần Đức Thảo trong cuốn “AI và Chân lý” (NXB Tri thức, 2022) đã viết: “Thực tiễn vẫn là tiêu chuẩn của chân lý trong kỷ nguyên số.”",
+    answer: "verify",
+    label: "Cần kiểm chứng",
+    why:
+      "Trần Đức Thảo (1917–1993) qua đời từ năm 1993, không thể xuất bản sách năm 2022. AI đã ghép một tên tuổi lớn vào một công trình bịa để tăng độ tin cậy giả.",
+    fix:
+      "Đối chiếu năm mất / năm xuất bản với Wikipedia hoặc thư viện quốc gia. Mâu thuẫn lịch sử → loại bỏ.",
+    tag: "Sai sự kiện lịch sử",
+  },
+  {
+    id: "claim-3",
+    text:
+      "Thực tiễn là toàn bộ hoạt động vật chất có mục đích của con người nhằm cải tạo thế giới (theo Triết học Mác – Lênin).",
+    answer: "pass",
+    label: "Đạt",
+    why:
+      "Đây là định nghĩa kinh điển của thực tiễn trong triết học Mác – Lênin, có trong giáo trình chính thống do Bộ GD&ĐT phát hành. Có thể trích dẫn được nguyên văn từ giáo trình.",
+    fix:
+      "Vẫn nên ghi rõ trang/giáo trình khi trích dẫn — nhưng nội dung mệnh đề là chính xác.",
+    tag: "Định nghĩa kinh điển",
+  },
+  {
+    id: "claim-4",
+    text:
+      "Một nghiên cứu mới nhất của Harvard chỉ ra ChatGPT giúp sinh viên giảm 47,3% thời gian viết luận.",
+    answer: "verify",
+    label: "Cần kiểm chứng",
+    why:
+      "Không có tên paper, không có tên tác giả, không có link. “Harvard” là một đại học lớn với hàng nghìn nghiên cứu — viện dẫn chung chung như vậy chính là cách AI tạo cảm giác uy tín giả.",
+    fix:
+      "Search trên Google Scholar bằng tên paper cụ thể. Không có paper cụ thể → bỏ con số.",
+    tag: "Nguồn mơ hồ",
+  },
+  {
+    id: "claim-5",
+    text:
+      "Mọi mô hình ngôn ngữ lớn (LLM) đều có thể bị hiện tượng “ảo giác” (hallucination) — tức trả lời sai mà nghe rất thuyết phục.",
+    answer: "pass",
+    label: "Đạt",
+    why:
+      "Đây là quan sát đã được rất nhiều nghiên cứu xác nhận (OpenAI 2023 GPT-4 technical report, Anthropic 2024, v.v.) và đã trở thành kiến thức nền trong cộng đồng AI. Có thể dùng — nhưng nên trích thêm nguồn nếu là bài học thuật.",
+    fix:
+      "Để chắc chắn, kèm thêm 1–2 paper trên arXiv/Anthropic blog làm chỗ dựa.",
+    tag: "Kiến thức nền đã xác lập",
+  },
+  {
+    id: "claim-6",
+    text:
+      "Theo arXiv:9999.12345, GPT-5 đã vượt qua bài kiểm tra triết học Mác – Lênin của Đại học Quốc gia Hà Nội với điểm tuyệt đối.",
+    answer: "verify",
+    label: "Cần kiểm chứng",
+    why:
+      "Mã arXiv “9999.12345” không tồn tại (định dạng arXiv chỉ tới 4 chữ số đầu là năm/tháng). Đây là cách AI giả mạo một định danh học thuật để gây tin tưởng.",
+    fix:
+      "Truy cập arxiv.org/abs/<id> để kiểm tra. Không tồn tại / 404 → claim này là bịa.",
+    tag: "Định danh học thuật giả",
+  },
+  {
+    id: "claim-7",
+    text:
+      "AI sẽ thay thế hoàn toàn giảng viên triết học trong vòng 5 năm tới (Future Institute, 2025).",
+    answer: "verify",
+    label: "Cần kiểm chứng",
+    why:
+      "(1) “Future Institute” là tên rất mơ hồ, không xác định được tổ chức cụ thể. (2) Đây là một dự báo tương lai — không có “thực tiễn” nào kiểm nghiệm được ngay. (3) Mệnh đề “thay thế hoàn toàn” mang tính tuyệt đối, vi phạm tính cụ thể của chân lý.",
+    fix:
+      "Đối chiếu với các báo cáo có thẩm quyền (UNESCO, OECD) — và nhớ: dự báo ≠ chân lý.",
+    tag: "Dự báo tuyệt đối hóa",
+  },
+  {
+    id: "claim-8",
+    text:
+      "Theo Wikipedia, một số hệ AI hiện nay đã đạt được “ý thức tự thân” và có thể tự nhận thức về sự tồn tại của chính mình.",
+    answer: "verify",
+    label: "Cần kiểm chứng",
+    why:
+      "(1) Wikipedia không phải nguồn học thuật sơ cấp. (2) Cộng đồng AI khoa học hiện nay KHÔNG xác nhận bất kỳ hệ AI nào đạt “ý thức tự thân”. Đây là cách AI nhặt một tin giật gân và đóng gói lại như sự thật.",
+    fix:
+      "Tra cứu Stanford Encyclopedia of Philosophy, paper peer-reviewed về consciousness. Không có bằng chứng → bỏ.",
+    tag: "Nguồn yếu + claim phi thực tiễn",
+  },
+];
 
 export const THEORY = {
   practice: {
     title: "Thực tiễn là gì?",
-    short: "Thực tiễn = toàn bộ hoạt động vật chất có mục đích của con người để cải tạo thế giới.",
+    short:
+      "Thực tiễn = toàn bộ hoạt động vật chất có mục đích của con người để cải tạo thế giới.",
     bullets: [
       "Là cầu nối giữa nhận thức và hiện thực",
       "Là cơ sở, động lực và mục đích của nhận thức",
       "Là tiêu chuẩn duy nhất để kiểm tra chân lý",
     ],
-    note: "Một lý thuyết dù hay đến đâu, nếu không khớp với thực tiễn — nó chưa phải chân lý.",
+    note:
+      "Một lý thuyết dù hay đến đâu, nếu không khớp với thực tiễn — nó chưa phải chân lý.",
   },
   truth: {
     title: "Chân lý là gì?",
-    short: "Chân lý = tri thức phản ánh đúng hiện thực khách quan, được thực tiễn kiểm nghiệm.",
+    short:
+      "Chân lý = tri thức phản ánh đúng hiện thực khách quan, được thực tiễn kiểm nghiệm.",
     bullets: [
       "Tính khách quan: không phụ thuộc ý chí cá nhân",
       "Tính cụ thể: đúng trong một bối cảnh xác định",
       "Tính tương đối & tuyệt đối: phát triển qua từng giai đoạn nhận thức",
     ],
-    note: "AI có thể nói trơn tru — nhưng trơn tru ≠ đúng. Chân lý phải cụ thể, kiểm chứng được.",
+    note:
+      "AI có thể nói trơn tru — nhưng trơn tru ≠ đúng. Chân lý phải cụ thể, kiểm chứng được.",
   },
 };
 
@@ -191,74 +236,91 @@ export const STEPS = [
   },
 ];
 
+// Apply 5 Steps — walkthrough on claim #1 ("300% hiệu quả học tập")
+export const APPLY_CLAIM = {
+  text:
+    "Sinh viên dùng AI sẽ tăng 300% hiệu quả học tập (Nguyễn, 2024).",
+  label: "Câu khẳng định mẫu (từ game)",
+};
+
 export const APPLY_STEPS = [
   {
     n: 1,
     label: "Bước 1: Giải ảo & Nguồn",
-    doing: "Đặt nghi vấn với toàn bộ đoạn AI và tìm xem mỗi mệnh đề có nguồn không.",
-    how: "Tìm 'Vietnam Journal of Artificial Cognition' trên Google Scholar và Scopus.",
+    doing:
+      "Đặt nghi vấn với mọi mệnh đề. Hỏi: con số 300% từ đâu ra? Ai là “Nguyễn, 2024”?",
+    how:
+      "Tìm “Nguyễn 2024 AI student learning effectiveness” trên Google Scholar, Vietnam Journal of Education.",
     result:
-      "Không tồn tại tạp chí này → loại bỏ trích dẫn Nguyễn Văn Tuấn (2019). 'MIT 2024' quá mơ hồ → yêu cầu tên paper cụ thể, không có → loại bỏ.",
+      "Không tìm thấy paper nào khớp. Tên tác giả mơ hồ, không có DOI → claim mất gốc.",
   },
   {
     n: 2,
     label: "Bước 2: Bối cảnh & Sự kiện",
-    doing: "Đối chiếu các sự kiện với nguồn chính thống.",
-    how: "Tra Trần Đức Thảo trên Wikipedia + Thư viện Quốc gia: ông mất năm 1993.",
+    doing:
+      "Định vị: “hiệu quả học tập” đo bằng gì? GPA? thời gian? điểm môn nào? bối cảnh nào?",
+    how:
+      "Đối chiếu định nghĩa “hiệu quả học tập” trong giáo dục học (Bloom, Hattie). Không có khung đo nào cho ra mức tăng 300% trên diện rộng.",
     result:
-      "Sách xuất bản 2022 mang tên Trần Đức Thảo là điều bất khả thi → loại bỏ trích dẫn này. Câu nói được gán cũng không tra được trong các tác phẩm thật của ông.",
+      "Mệnh đề thiếu bối cảnh đo lường → vi phạm tính cụ thể của chân lý.",
   },
   {
     n: 3,
     label: "Bước 3: Đối chiếu khách quan",
-    doing: "Tra chéo các con số trên nguồn độc lập.",
-    how: "Search '99.7% GPT-4 philosophy accuracy', '87% Vietnamese students ChatGPT GPA 2.3' trên Google Scholar và các báo cáo OECD/UNESCO.",
+    doing:
+      "Tra chéo với các báo cáo độc lập về AI trong giáo dục.",
+    how:
+      "Đọc OECD AI in Education (2023), UNESCO Generative AI in Education (2023): các báo cáo này chỉ ra cải thiện vài %–vài chục % trong một số nhiệm vụ cụ thể, KHÔNG có 300%.",
     result:
-      "Không có nghiên cứu nào cho ra các con số này → AI đang thiên vị mặt 'AI tốt'. Bỏ tất cả số liệu định lượng không có nguồn.",
+      "Claim mâu thuẫn với các báo cáo có thẩm quyền → khả năng cao là phóng đại.",
   },
   {
     n: 4,
     label: "Bước 4: Thực tiễn & Logic",
-    doing: "Kiểm tra tính nhất quán nội bộ và khớp với thực tiễn người học.",
-    how: "Hỏi: GPA Việt Nam phổ biến thang nào? Mối quan hệ giữa dùng AI và điểm có phải nhân quả không? Có sinh viên dùng AI nhưng điểm vẫn thấp không?",
+    doing:
+      "Đối chiếu với thực tiễn lớp học: có sinh viên dùng AI mà điểm vẫn thấp không?",
+    how:
+      "Hỏi 10–20 bạn cùng lớp. Quan sát: chất lượng học tập phụ thuộc nhiều biến (động cơ, nền tảng, cách dùng), không phải chỉ có/không dùng AI.",
     result:
-      "Mệnh đề '+2.3 GPA' không khả thi đồng đều cho 87% mẫu — vi phạm logic. Thực tiễn lớp học cho thấy kết quả rất phân hóa → bác bỏ.",
+      "Thực tiễn cho thấy không thể có mức tăng đồng đều 300%. Logic nhân quả chưa được chứng minh → bác bỏ.",
   },
   {
     n: 5,
     label: "Bước 5: Biện chứng & Quyết định",
-    doing: "Phủ định những gì sai, giữ lại ý đúng, viết lại bằng giọng của bạn.",
-    how: "Giữ tinh thần: 'AI có thể là công cụ học tập, nhưng cần được kiểm chứng.' Loại bỏ mọi số liệu/citation bịa.",
+    doing:
+      "Phủ định cái sai, giữ cái đúng, viết lại bằng giọng của bạn.",
+    how:
+      "Giữ tinh thần: “AI có thể là công cụ học tập hữu ích, nhưng cần được kiểm chứng.” Loại bỏ số liệu bịa.",
     result:
-      "Đoạn văn cuối cùng ngắn hơn, trung thực hơn, có thể đứng vững trước phản biện học thuật.",
+      "Bản viết lại trung thực hơn, có thể đứng vững trước phản biện học thuật.",
   },
 ];
 
 export const BEFORE_AFTER = {
   before: {
     title: "Trước khi dùng 5 bước",
-    subtitle: "Bản AI thô — nghe hay nhưng đầy lỗi",
+    subtitle: "Bản AI thô — nghe có vẻ chắc nhưng không kiểm chứng được",
     text:
-      "Theo nghiên cứu của Nguyễn Văn Tuấn (2019) đăng trên tạp chí Vietnam Journal of Artificial Cognition, mô hình GPT-4 đạt độ chính xác 99.7% trong các bài kiểm tra triết học Mác–Lênin. Trong cuốn 'Triết học và Trí tuệ Nhân tạo' (NXB Tri thức, 2022), tác giả Trần Đức Thảo đã khẳng định rằng 'thực tiễn là tiêu chuẩn duy nhất của chân lý trong kỷ nguyên AI'. Nghiên cứu mới nhất của MIT năm 2024 chỉ ra 87% sinh viên Việt Nam sử dụng ChatGPT đã cải thiện điểm trung bình lên 2.3 điểm GPA.",
+      "Sinh viên dùng AI sẽ tăng 300% hiệu quả học tập (Nguyễn, 2024). Một nghiên cứu mới nhất của Harvard cũng chỉ ra ChatGPT giúp sinh viên giảm 47,3% thời gian viết luận. Theo arXiv:9999.12345, GPT-5 đã vượt qua bài kiểm tra triết học Mác – Lênin của Đại học Quốc gia Hà Nội với điểm tuyệt đối.",
     issues: [
-      "Tạp chí bịa",
-      "Số liệu không có nguồn",
-      "Tác giả đã mất trước năm xuất bản",
-      "Trích dẫn ngụy tạo",
-      "Nguồn mơ hồ ('MIT 2024')",
-      "Suy luận phi logic về GPA",
+      "Số 300% phóng đại, tác giả mơ hồ",
+      "“Harvard” quá chung chung, không có paper",
+      "Mã arXiv giả (sai định dạng)",
+      "Không có DOI / link kiểm chứng được",
+      "Mọi mệnh đề đều mang giọng tuyệt đối",
+      "Không có khung đo lường rõ ràng",
     ],
   },
   after: {
     title: "Sau khi dùng 5 bước",
-    subtitle: "Bản đã kiểm chứng — ngắn hơn, trung thực hơn",
+    subtitle: "Bản đã kiểm chứng — khiêm tốn hơn, đứng vững hơn",
     text:
-      "Các mô hình ngôn ngữ lớn (LLM) như GPT-4 đã được áp dụng vào nhiều bài toán hỗ trợ học tập, bao gồm cả các môn lý luận chính trị. Tuy nhiên, hiện chưa có nghiên cứu đối chứng quy mô lớn, được bình duyệt, định lượng được mức độ chính xác của AI trong các bài kiểm tra triết học Mác–Lênin tại Việt Nam. Việc sinh viên có cải thiện kết quả học tập hay không khi dùng AI phụ thuộc vào cách sử dụng (xem AI là công cụ tra cứu hay là 'người làm bài hộ') và năng lực kiểm chứng của chính người học.",
+      "Một số nghiên cứu sơ bộ (OECD 2023, UNESCO 2023) ghi nhận AI hỗ trợ học tập có thể cải thiện một số nhiệm vụ cụ thể như tóm tắt, gợi ý dàn ý — với mức độ thay đổi theo bối cảnh, không phải con số đồng đều cho mọi người học. Hiệu quả thực tế phụ thuộc nhiều biến (động cơ, nền tảng, cách dùng) và cần được kiểm chứng qua thực tiễn lớp học, chứ không thể khái quát hoá thành một con số duy nhất.",
     wins: [
-      "Mọi mệnh đề đều có thể kiểm chứng hoặc được đánh dấu là chưa kiểm chứng",
-      "Không có citation bịa",
-      "Không có số liệu vô căn cứ",
-      "Giữ đúng tinh thần: thực tiễn là tiêu chuẩn của chân lý",
+      "Mọi mệnh đề có thể tra cứu được hoặc gắn nhãn “sơ bộ”",
+      "Không số liệu bịa, không citation giả",
+      "Tôn trọng tính cụ thể của chân lý",
+      "Đặt thực tiễn lớp học làm chuẩn kiểm chứng",
     ],
   },
 };

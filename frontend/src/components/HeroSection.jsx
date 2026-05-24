@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { HERO } from "@/data/content";
 import { RevealOnScroll, StaggerGroup, StaggerItem } from "./RevealOnScroll";
+import { HeroThreeBackground } from "./HeroThreeBackground";
 
 const smoothScrollTo = (id) => {
   const el = document.getElementById(id);
@@ -40,6 +41,9 @@ export const HeroSection = () => {
         aria-hidden
         className="noise-overlay absolute inset-0 opacity-40"
       />
+
+      {/* Three.js floating shapes background */}
+      <HeroThreeBackground className="opacity-70 mix-blend-multiply" />
 
       <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-8">
         {/* Left */}
@@ -79,7 +83,7 @@ export const HeroSection = () => {
                 className="group rounded-xl bg-primary px-5 text-primary-foreground transition-colors hover:bg-[hsl(var(--primary)/0.92)]"
               >
                 <Gamepad2 className="mr-2 size-5" strokeWidth={2} />
-                Chơi game tìm lỗi AI
+                Chơi AI Verification Quiz
                 <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.25} />
               </Button>
               <Button

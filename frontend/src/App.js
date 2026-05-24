@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 import { StickyNav } from "./components/StickyNav";
 import { HeroSection } from "./components/HeroSection";
-import { GameFindAIMistakes } from "./components/GameFindAIMistakes";
+import { GameVerifyClaims } from "./components/GameVerifyClaims";
 import { TheoryCards } from "./components/TheoryCards";
 import { FiveStepsStepper } from "./components/FiveStepsStepper";
 import { ApplyStepsWalkthrough } from "./components/ApplyStepsWalkthrough";
@@ -23,7 +23,7 @@ const LandingPage = () => {
       <StickyNav />
       <main>
         <HeroSection />
-        <GameFindAIMistakes />
+        <GameVerifyClaims />
         <TheoryCards />
         <FiveStepsStepper />
         <ApplyStepsWalkthrough />

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Wand2, ArrowRight, CheckCircle2, XCircle, Search } from "lucide-react";
+import { Wand2, ArrowRight, CheckCircle2, XCircle, Search, Quote } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { APPLY_STEPS } from "@/data/content";
+import { APPLY_STEPS, APPLY_CLAIM } from "@/data/content";
 import { RevealOnScroll } from "./RevealOnScroll";
 
 export const ApplyStepsWalkthrough = () => {
@@ -25,11 +25,32 @@ export const ApplyStepsWalkthrough = () => {
             </Badge>
           </div>
           <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-            Áp dụng 5 bước lên đoạn văn của game
+            Áp dụng 5 bước lên một câu khẳng định của game
           </h2>
           <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted-foreground">
             Cuốn phải — bạn sẽ thấy “không gian hộp đen” của AI bị mở từng lớp.
           </p>
+        </RevealOnScroll>
+
+        <RevealOnScroll delay={0.05}>
+          <Card className="mt-6 rounded-2xl border-dashed border-[hsl(24_94%_55%/0.4)] bg-[hsl(24_100%_96%)] p-5 sm:p-6">
+            <div className="flex items-start gap-3">
+              <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl bg-card text-[hsl(24_94%_30%)] ring-1 ring-border">
+                <Quote className="size-4" strokeWidth={2} />
+              </span>
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-[hsl(24_94%_30%)]">
+                  {APPLY_CLAIM.label}
+                </p>
+                <p
+                  data-testid="apply-claim-text"
+                  className="mt-1 font-display text-base font-semibold leading-relaxed text-foreground sm:text-lg"
+                >
+                  “{APPLY_CLAIM.text}”
+                </p>
+              </div>
+            </div>
+          </Card>
         </RevealOnScroll>
 
         <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-12">
