@@ -31,8 +31,7 @@ const useShareUrl = () => {
   const [url, setUrl] = useState("");
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Sửa lại link QR trỏ về /play
-      setUrl(`${window.location.origin}/play`);
+      setUrl(`${window.location.origin}${window.location.pathname}/play`);
     }
   }, []);
   return url;
@@ -45,22 +44,10 @@ const buildQrSrc = (url) =>
       )}&color=0F766E&bgcolor=FFFFFF`
     : "";
 
-const fetchGameStats = async () => {
-  try {
-    const res = await fetch("https://website-mln.onrender.com/api/game/stats");
-    if (!res.ok) throw new Error("Failed to fetch stats");
-    return await res.json();
-  } catch (error) {
-    console.error("Lỗi lấy thống kê:", error);
-    return null;
-  }
-};
-
 // ----- Intro Screen -----
-// ĐÃ XÓA PHẦN HIỂN THỊ QR CODE TRONG NÀY ĐỂ TRÁNH TRÙNG LẶP
-const IntroScreen = ({ onStart }) => (
+const IntroScreen = ({ onStart, qrUrl }) => (
   <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-    <RevealOnScroll className="lg:col-span-12">
+    <RevealOnScroll className="lg:col-span-7">
       <Card className="rounded-2xl border-border bg-card p-6 shadow-[0_10px_30px_-22px_rgba(15,23,42,0.35)] sm:p-8">
         <Badge className="rounded-full border-0 bg-[hsl(174_55%_92%)] text-[hsl(174_62%_28%)] hover:bg-[hsl(174_55%_92%)]">
           <Sparkles className="mr-1.5 size-3.5" strokeWidth={2.25} />
@@ -115,9 +102,40 @@ const IntroScreen = ({ onStart }) => (
             <ArrowRight className="ml-2 size-4" strokeWidth={2.25} />
           </Button>
           <p className="text-sm text-muted-foreground">
-            Hoặc xem hướng dẫn bên phải để quét QR chơi trên điện thoại
+            hoặc <span className="font-semibold text-foreground">quét QR</span>{" "}
+            để chơi trên điện thoại
           </p>
         </div>
+      </Card>
+    </RevealOnScroll>
+
+    <RevealOnScroll className="lg:col-span-5" delay={0.05}>
+      <Card
+        data-testid="game-qr-card"
+        className="flex h-full flex-col items-center justify-center rounded-2xl border-dashed border-[hsl(174_62%_33%/0.4)] bg-[hsl(174_55%_96%)] p-6 text-center"
+      >
+        <Badge className="rounded-full border-0 bg-card text-foreground ring-1 ring-border hover:bg-card">
+          <QrCode className="mr-1.5 size-3.5" strokeWidth={2.25} />
+          Quét để tham gia
+        </Badge>
+        <div className="mt-4 rounded-2xl bg-white p-3 ring-1 ring-[hsl(174_62%_33%/0.25)] shadow-[0_18px_40px_-24px_rgba(15,23,42,0.45)]">
+          {qrUrl ? (
+            <img
+              src={buildQrSrc(qrUrl)}
+              alt="QR code để chơi AI Verification Quiz"
+              width={240}
+              height={240}
+              className="size-[200px] rounded-lg sm:size-[240px]"
+              data-testid="game-qr-image"
+            />
+          ) : (
+            <div className="size-[200px] animate-pulse rounded-lg bg-secondary sm:size-[240px]" />
+          )}
+        </div>
+        <p className="mt-4 flex items-center justify-center gap-1.5 text-sm font-medium text-[hsl(174_62%_22%)]">
+          <Smartphone className="size-4" strokeWidth={2.25} />
+          {GAME_INTRO.scanHint}
+        </p>
       </Card>
     </RevealOnScroll>
   </div>
@@ -528,31 +546,18 @@ export const GameVerifyClaims = () => {
 
   const [stats, setStats] = useState(null);
   const [loadingStats, setLoadingStats] = useState(true);
-    
+
   useEffect(() => {
-    let isMounted = true;
-
     const getStats = async () => {
-      try {
-        const data = await fetchGameStats();
-        if (isMounted && data) {
-          setStats(data);
-          setLoadingStats(false);
-        }
-      } catch (error) {
-        console.error(error);
-        if (isMounted) setLoadingStats(false);
+      setLoadingStats(true);
+      const data = await fetchGameStats(); // Hàm fetch đã viết ở Bước 1
+      if (data) {
+        setStats(data);
       }
+      setLoadingStats(false);
     };
-
     getStats();
-    const intervalId = setInterval(getStats, 5000);
-
-    return () => {
-      isMounted = false;
-      clearInterval(intervalId);
-    };
-  }, []); 
+  }, []);
 
   const claim = useMemo(() => GAME_CLAIMS[index], [index]);
 
@@ -639,6 +644,7 @@ export const GameVerifyClaims = () => {
           </div>
         </div>
         
+        {/* Hiển thị chi tiết từng claim nếu muốn (Optional) */}
         {stats.claim_stats && stats.claim_stats.length > 0 && (
            <div className="mt-3 pt-3 border-t border-border">
              <p className="text-[10px] uppercase tracking-wider text-muted-foreground mb-1">
@@ -663,6 +669,7 @@ export const GameVerifyClaims = () => {
       data-testid="game-section"
       className="relative isolate scroll-mt-24 overflow-hidden bg-[hsl(210_40%_98%)] py-16 sm:py-20 lg:py-24"
     >
+      {/* Subtle particles backdrop */}
       <SectionParticles color="#5ec4b6" className="opacity-50" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -684,39 +691,7 @@ export const GameVerifyClaims = () => {
 
         <div className="mt-8">
           {phase === "intro" && (
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-              {/* Cột trái: Chỉ còn nội dung Intro (đã xóa QR) */}
-              <div className="lg:col-span-7">
-                 <IntroScreen onStart={handleStart} />
-              </div>
-              
-              {/* Cột phải: QR Code + Thống kê */}
-              <div className="lg:col-span-5 flex flex-col gap-4">
-                 {/* Card QR Code duy nhất */}
-                 <Card className="flex flex-col items-center justify-center rounded-2xl border-dashed border-[hsl(174_62%_33%/0.4)] bg-[hsl(174_55%_96%)] p-6 text-center">
-                    <Badge className="rounded-full border-0 bg-card text-foreground ring-1 ring-border hover:bg-card">
-                      <QrCode className="mr-1.5 size-3.5" strokeWidth={2.25} />
-                      Quét để tham gia
-                    </Badge>
-                    <div className="mt-4 rounded-2xl bg-white p-3 ring-1 ring-[hsl(174_62%_33%/0.25)] shadow-[0_18px_40px_-24px_rgba(15,23,42,0.45)]">
-                      {qrUrl ? (
-                        <img src={buildQrSrc(qrUrl)} alt="QR" width={240} height={240} className="size-[200px] rounded-lg sm:size-[240px]" />
-                      ) : (
-                        <div className="size-[200px] animate-pulse rounded-lg bg-secondary sm:size-[240px]" />
-                      )}
-                    </div>
-                    <p className="mt-4 flex items-center justify-center gap-1.5 text-sm font-medium text-[hsl(174_62%_22%)]">
-                      <Smartphone className="size-4" strokeWidth={2.25} />
-                      {GAME_INTRO.scanHint}
-                    </p>
-                 </Card>
-
-                 {/* Card Thống kê */}
-                 <Card className="rounded-2xl border-border bg-card p-4 shadow-sm">
-                    <StatsSummary />
-                 </Card>
-              </div>
-            </div>
+            <IntroScreen onStart={handleStart} qrUrl={qrUrl} />
           )}
           {phase === "playing" && (
             <QuestionScreen
@@ -749,3 +724,4 @@ export const GameVerifyClaims = () => {
     </section>
   );
 };
+
