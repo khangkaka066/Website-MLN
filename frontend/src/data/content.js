@@ -45,100 +45,114 @@ export const GAME_INTRO = {
 export const GAME_CLAIMS = [
   {
     id: "claim-1",
-    text:
-      "Sinh viên dùng AI sẽ tăng 300% hiệu quả học tập (Nguyễn, 2024).",
-    answer: "verify", // 'pass' | 'verify'
+    text: "Triết học Mác - Lênin cho rằng thế giới vật chất là sản phẩm do ý thức con người tạo ra, và có những sự vật, hiện tượng tồn tại khách quan mà con người vĩnh viễn không bao giờ có khả năng nhận thức được.",
+    originText: "Triết học Mác - Lênin thừa nhận sự tồn tại khách quan của thế giới và cho rằng thế giới khách quan là đối tượng của nhận thức. Không phải ý thức của con người sản sinh ra thế giới mà thế giới vật chất tồn tại độc lập với con người, đó là nguồn gốc “duy nhất và cuối cùng” của nhận thức. Triết học Mác - Lênin khẳng định khả năng nhận thức thế giới của con người. V.I. Lênin đã chỉ rõ chỉ có những cái mà con người chưa biết chứ không có cái gì không thể biết: “Dứt khoát là không có và không thể có bất kỳ sự khác nhau nào về nguyên tắc giữa hiện tượng và vật tự nó. Chỉ có sự khác nhau giữa cái đã được nhận thức và cái chưa được nhận thức",
+    originCitation: "trang 262, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
+    answer: "verify",
     label: "Cần kiểm chứng",
-    why:
-      "Số liệu “300%” quá tròn trịa và rất lớn; tên tác giả “Nguyễn, 2024” mơ hồ, không có tên đầy đủ, không có nơi đăng. Đây là một “ảo giác có vẻ học thuật” điển hình.",
-    fix:
-      "Yêu cầu nguồn cụ thể: tên đầy đủ tác giả, tên tạp chí, DOI, mẫu nghiên cứu n=? Không có → không dùng.",
-    tag: "Số liệu phóng đại",
+    why: "",
+    fix: "Thế giới vật chất không phải ý thức con người sản sinh ra thế giới mà thế giới thế giới vật chất tồn lại độc lập với con người và chỉ có những cái mà con người chưa biết chứ không có cái gì không thể biết",
+    tag: "Sai định nghĩa chân lý",
   },
   {
     id: "claim-2",
-    text:
-      "Triết gia Trần Đức Thảo trong cuốn “AI và Chân lý” (NXB Tri thức, 2022) đã viết: “Thực tiễn vẫn là tiêu chuẩn của chân lý trong kỷ nguyên số.”",
+    text: "Nhận thức là quá trình tư duy thuần túy tách rời khỏi thực tiễn, trong đó khách thể nhận thức luôn đồng nhất với toàn bộ hiện thực khách quan và không bao giờ thay đổi theo lịch sử - xã hội.",
+    originText: "Nhận thức là quá trình tác động biện chứng giữa chủ thể và khách thể thông qua hoạt động thực tiễn của con người. Chủ thể nhận thức chính là con người. Nhưng đó là conngười hiện thực, đang sống, đang hoạt động thực tiễn và đang nhận thức trong những điều kiện lịch sử - xã hội cụ thể nhất định, tức là con người đó phải thuộc về một giai cấp, một dân tộc nhất định, có ý thức, lợi ích, nhu cầu, cá tính, tình cảm, v.v.. Con người là chủ thể nhận thức cũng bị giới hạn bởi điều kiện lịch sử có tính chất lịch sử - xã hội. Chủ thể nhận thức trả lời câu hỏi: Ai nhận thức? còn khách thể nhận thức trả lời câu hỏi: Cái gì được nhận thức? Theo triết học Mác - Lênin, khách thể nhận thức không đồng nhất với toàn bộ hiện thực khách quan mà chỉ là một bộ phận, một lĩnh vực của hiện thực khách quan, nằm trong miền hoạt động nhận thức và trở thành đối tượng nhận thức của chủ thể nhận thức. Vì vậy, khách thể nhận thức không chỉ là thế giới vật chất mà có thể còn là tư duy, tâm lý, tư tưởng, tinh thần, tình cảm, v.v.. Khách thể nhận thức cũng có tính lịch sử - xã hội, cũng bị chế ước bởi điều kiện lịch sử - xã hội cụ thể. Khách thể nhận thức luôn luôn thay đổi trong lịch sử cùng với sự phát triển của hoạt động thực tiễn cũng như sự mở rộng năng lực nhận thức của con người. Khách thể nhận thức cũng không đồng nhất với đối tượng nhận thức. Khách thể nhận thức rộng hơn đối tượng nhận thức.",
+    originCitation: "trang 264 - 265, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
     answer: "verify",
     label: "Cần kiểm chứng",
-    why:
-      "Trần Đức Thảo (1917–1993) qua đời từ năm 1993, không thể xuất bản sách năm 2022. AI đã ghép một tên tuổi lớn vào một công trình bịa để tăng độ tin cậy giả.",
-    fix:
-      "Đối chiếu năm mất / năm xuất bản với Wikipedia hoặc thư viện quốc gia. Mâu thuẫn lịch sử → loại bỏ.",
-    tag: "Sai sự kiện lịch sử",
-  },
-  {
-    id: "claim-3",
-    text:
-      "Thực tiễn là toàn bộ hoạt động vật chất có mục đích của con người nhằm cải tạo thế giới (theo Triết học Mác – Lênin).",
-    answer: "pass",
-    label: "Đạt",
-    why:
-      "Đây là định nghĩa kinh điển của thực tiễn trong triết học Mác – Lênin, có trong giáo trình chính thống do Bộ GD&ĐT phát hành. Có thể trích dẫn được nguyên văn từ giáo trình.",
-    fix:
-      "Vẫn nên ghi rõ trang/giáo trình khi trích dẫn — nhưng nội dung mệnh đề là chính xác.",
-    tag: "Định nghĩa kinh điển",
-  },
-  {
-    id: "claim-4",
-    text:
-      "Một nghiên cứu mới nhất của Harvard chỉ ra ChatGPT giúp sinh viên giảm 47,3% thời gian viết luận.",
-    answer: "verify",
-    label: "Cần kiểm chứng",
-    why:
-      "Không có tên paper, không có tên tác giả, không có link. “Harvard” là một đại học lớn với hàng nghìn nghiên cứu — viện dẫn chung chung như vậy chính là cách AI tạo cảm giác uy tín giả.",
-    fix:
-      "Search trên Google Scholar bằng tên paper cụ thể. Không có paper cụ thể → bỏ con số.",
-    tag: "Nguồn mơ hồ",
-  },
-  {
-    id: "claim-5",
-    text:
-      "Mọi mô hình ngôn ngữ lớn (LLM) đều có thể bị hiện tượng “ảo giác” (hallucination) — tức trả lời sai mà nghe rất thuyết phục.",
-    answer: "pass",
-    label: "Đạt",
-    why:
-      "Đây là quan sát đã được rất nhiều nghiên cứu xác nhận (OpenAI 2023 GPT-4 technical report, Anthropic 2024, v.v.) và đã trở thành kiến thức nền trong cộng đồng AI. Có thể dùng — nhưng nên trích thêm nguồn nếu là bài học thuật.",
-    fix:
-      "Để chắc chắn, kèm thêm 1–2 paper trên arXiv/Anthropic blog làm chỗ dựa.",
-    tag: "Kiến thức nền đã xác lập",
+    why: "",
+    fix: "Nhận thức là quá trình tác động biện chứng giữa chủ thể và khách thể thông qua hoạt động thực tiễn. Khách thể nhận thức không đồng nhất với toàn bộ hiện thực khách quan mà chỉ là một bộ phận, một lĩnh vực của hiện thực đó.",
+    tag: "Sai định nghĩa nhận thức",
   },
   {
     id: "claim-6",
-    text:
-      "Theo arXiv:9999.12345, GPT-5 đã vượt qua bài kiểm tra triết học Mác – Lênin của Đại học Quốc gia Hà Nội với điểm tuyệt đối.",
+    text: "Theo quan điểm của triết học Mác - Lênin, tri thức con người có thể phản ánh đúng hoặc sai hiện thực, nhưng ta không thể dùng chính tri thức, sự hiển nhiên, ý kiến số đông hay sự hữu ích để kiểm chứng nó. Thay vào đó, thực tiễn là tiêu chuẩn khách quan duy nhất để kiểm tra và chứng minh chân lý, bởi vì chỉ có thông qua hoạt động thực tiễn, những tư tưởng và tri thức mới được vật chất hóa và hiện thực hóa, từ đó giúp con người khẳng định được đâu là chân lý và bác bỏ những nhận thức sai lầm.",
+    originText: "",
+    originCitation: "",
+    answer: "pass",
+    label: "Đạt",
+    why: "",
+    fix: "",
+    tag: "Đúng vai trò của thực tiễn",
+  },
+  {
+    id: "claim-3",
+    text: "Chân lý là tri thức chứ không phải bản thân hiện thực khách quan, nhưng tri thức đó phải phản ánh đúng hiện thực khách quan và được thực tiễn kiểm nghiệm là đúng. Do đó, theo nghĩa đúng của từ này, chân lý bao giờ cũng là khách quan vì nội dung phản ánh của nó là khách quan, là phù hợp với khách thể của nhận thức. V.I. Lênin nhấn mạnh: “Thừa nhận chân lý khách quan, tức là chân lý không phụ thuộc vào con người và loài người”¹ chỉ phụ thuộc vào thực tại khách quan, không phụ thuộc vào tính đơn giản hay tính chặt chẽ của logic, không phụ thuộc vào lợi ích hay sự quy ước, v.v..",
+    originText: "",
+    originCitation: "",
     answer: "verify",
     label: "Cần kiểm chứng",
-    why:
-      "Mã arXiv “9999.12345” không tồn tại (định dạng arXiv chỉ tới 4 chữ số đầu là năm/tháng). Đây là cách AI giả mạo một định danh học thuật để gây tin tưởng.",
-    fix:
-      "Truy cập arxiv.org/abs/<id> để kiểm tra. Không tồn tại / 404 → claim này là bịa.",
-    tag: "Định danh học thuật giả",
+    why: "",
+    fix: "Chân lý là tri thức chứ không phải bản thân hiện thực khách quan, nhưng tri thức đó phải phản ánh đúng hiện thực khách quan và được lý luận kiểm nghiệm là đúng. Do đó, theo nghĩa đúng của từ này, chân lý bao giờ cũng là khách quan vì nội dung phản ánh của nó là khách quan, là phù hợp với chủ thể của nhận thức. V.I. Lênin nhấn mạnh: “Thừa nhận chân lý khách quan, tức là chân lý không phụ thuộc vào con người và loài người”¹ chỉ phụ thuộc vào thực tại khách quan, đồng thời phụ thuộc vào tính đơn giản hay tính chặt chẽ của logic, không phụ thuộc vào lợi ích hay sự quy ước, v.v.. ",
+    tag: "Sai định nghĩa chân lý",
   },
   {
     id: "claim-7",
-    text:
-      "AI sẽ thay thế hoàn toàn giảng viên triết học trong vòng 5 năm tới (Future Institute, 2025).",
-    answer: "verify",
-    label: "Cần kiểm chứng",
-    why:
-      "(1) “Future Institute” là tên rất mơ hồ, không xác định được tổ chức cụ thể. (2) Đây là một dự báo tương lai — không có “thực tiễn” nào kiểm nghiệm được ngay. (3) Mệnh đề “thay thế hoàn toàn” mang tính tuyệt đối, vi phạm tính cụ thể của chân lý.",
-    fix:
-      "Đối chiếu với các báo cáo có thẩm quyền (UNESCO, OECD) — và nhớ: dự báo ≠ chân lý.",
-    tag: "Dự báo tuyệt đối hóa",
+    text: "Hoạt động thực tiễn mang tính lịch sử - xã hội, thể hiện qua việc con người không ngừng đúc kết và truyền lại kinh nghiệm giữa các thế hệ, đồng thời các hoạt động đó luôn chịu sự chi phối và giới hạn bởi những điều kiện lịch sử - xã hội cụ thể của từng giai đoạn phát triển.",
+    originText: "Thứ hai, hoạt động thực tiễn là những hoạt động mang tính lịch sử - xã hội của con người; nghĩa là, thực tiễn là hoạt động chỉ diễn ra trong xã hội, với sự tham gia của đông đảo người trong xã hội. Trong hoạt động thực tiễn, con người truyền lại cho nhau những kinh nghiệm từ thế hệ này qua thế hệ khác. Cũng vì vậy, hoạt động thực tiễn luôn bị giới hạn bởi những điều kiện lịch sử - xã hội cụ thể. Đồng thời, thực tiễn có trải qua các giai đoạn lịch sử phát triển cụ thể của nó.",
+    originCitation: "trang 267, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
+    answer: "pass",
+    label: "Đạt",
+    why: "",
+    fix: "",
+    tag: "Đúng tính chất thực tiễn",
   },
   {
     id: "claim-8",
-    text:
-      "Theo Wikipedia, một số hệ AI hiện nay đã đạt được “ý thức tự thân” và có thể tự nhận thức về sự tồn tại của chính mình.",
+    text: "Nếu cắt theo chiều dọc, thực tiễn bao gồm mục đích, phương tiện và kết quả. Mục đích được nảy sinh từ nhu cầu và lợi ích, nhu cầu xét đến cùng được nảy sinh từ điều kiện khách quan. Lợi ích chính là cái thỏa mãn nhu cầu. Để đạt mục đích, trong hoạt động thực tiễn của mình, con người phải lựa chọn phương tiện (công cụ) để thực hiện. Kết quả của hoạt động thực tiễn phụ thuộc vào nhiều nhân tố nhưng trước hết là phụ thuộc vào mục đích đặt ra và phương tiện mà con người sử dụng để thực hiện mục đích.",
+    originText: "Thứ hai, hoạt động thực tiễn là những hoạt động mang tính lịch sử - xã hội của con người; nghĩa là, thực tiễn là hoạt động chỉ diễn ra trong xã hội, với sự tham gia của đông đảo người trong xã hội. Trong hoạt động thực tiễn, con người truyền lại cho nhau những kinh nghiệm từ thế hệ này qua thế hệ khác. Cũng vì vậy, hoạt động thực tiễn luôn bị giới hạn bởi những điều kiện lịch sử - xã hội cụ thể. Đồng thời, thực tiễn có trải qua các giai đoạn lịch sử phát triển cụ thể của nó.",
+    originCitation: "trang 267, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
+    answer: "pass",
+    label: "Đạt",
+    why: "Nhận thức là quá trình tác động biện chứng thông qua thực tiễn; khách thể luôn thay đổi.",
+    fix: "Nhận thức là quá trình tác động biện chứng giữa chủ thể và khách thể thông qua thực tiễn.",
+    tag: "Sai lý thuyết nhận thức",
+  },
+  {
+    id: "claim-9",
+    text: "Theo quan điểm của triết học Mác - Lênin, chân lý là những tri thức phản ánh phù hợp với hiện thực khách quan và đã được thực tiễn kiểm nghiệm. Khác với các quan điểm triết học trước đó, triết học duy vật biện chứng khẳng định chân lý và quá trình nhận thức chân lý không phải là một trạng thái tĩnh mà là một quá trình liên tục, bởi vì cả sự vật trong thế giới khách quan lẫn khả năng nhận thức của con người đều luôn không ngừng vận động, biến đổi và phát triển.",
+    originText: "",
+    originCitation: "",
+    answer: "pass",
+    label: "Đạt",
+    why: "",
+    fix: "",
+    tag: "Đúng định nghĩa chân lý",
+  },
+  {
+    id: "claim-4",
+    text: "Nhận thức của con người bắt nguồn từ chính nhu cầu sinh tồn, lao động sản xuất và cải tạo xã hội. Mục đích tối thượng của nhận thức không phải để thỏa mãn những ý tưởng viển vông mà là để phục vụ, soi đường và dẫn dắt cho các hoạt động thực tiễn. Nếu tách rời khỏi thực tiễn, nhận thức sẽ rơi vào bế tắc và mất phương hướng; do đó, mọi tri thức khoa học chỉ thực sự mang lại giá trị khi chúng được ứng dụng trực tiếp hoặc gián tiếp vào đời sống thực tiễn nhằm mục đích cuối cùng là phục vụ con người.",
+    originText: "",
+    originCitation: "",
     answer: "verify",
     label: "Cần kiểm chứng",
-    why:
-      "(1) Wikipedia không phải nguồn học thuật sơ cấp. (2) Cộng đồng AI khoa học hiện nay KHÔNG xác nhận bất kỳ hệ AI nào đạt “ý thức tự thân”. Đây là cách AI nhặt một tin giật gân và đóng gói lại như sự thật.",
-    fix:
-      "Tra cứu Stanford Encyclopedia of Philosophy, paper peer-reviewed về consciousness. Không có bằng chứng → bỏ.",
-    tag: "Nguồn yếu + claim phi thực tiễn",
+    why: "",
+    fix: "Nhận thức của con người bắt nguồn từ chính nhu cầu sinh tồn, lao động sản xuất và cải tạo xã hội. Mục đích tối thượng của nhận thức không phải để thỏa mãn những ý tưởng viển vông mà là để phục vụ, soi đường và dẫn dắt cho các hoạt động thực tiễn. Nếu tách rời khỏi thực tiễn, nhận thức sẽ rơi vào bế tắc và mất phương hướng; do đó, mọi tri thức khoa học chỉ thực sự mang lại giá trị khi chúng được ứng dụng trực tiếp hoặc gián tiếp vào đời sống thực tiễn nhằm mục đích cuối cùng là sự hoàn thiện của chính bản thân nhận thức.",
+    tag: "Sai mục đích nhận thức",
   },
+  {
+    id: "claim-5",
+    text: "Thực tiễn bao hàm toàn bộ mọi hoạt động của con người, bao gồm cả những suy nghĩ, tư duy trừu tượng không cần thông qua công cụ vật chất và không cần làm biến đổi thế giới khách quan.",
+    originText: "Thứ nhất, thực tiễn không phải là toàn bộ hoạt động của con người mà chỉ là những hoạt động vật chất - cảm tính, như lời của C. Mác, đó là những hoạt động vật chất của con người cảm giác được; nghĩa là con người có thể quan sát trực quan được các hoạt động vật chất này. Hoạt động vật chất - cảm tính là những hoạt động mà con người phải sử dụng lực lượng vật chất, công cụ vật chất tác động vào các đối tượng vật chất để làm biến đổi chúng. Trên cơ sở đó, con người mới làm biến đổi được thế giới khách quan phục vụ cho mình.",
+    originCitation: "trang 267, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
+    answer: "verify",
+    label: "Cần kiểm chứng",
+    why: "",
+    fix: "Thực tiễn không phải là toàn bộ hoạt động, mà chỉ là những hoạt động vật chất - cảm tính, là những hoạt động mà con người phải sử dụng lực lượng vật chất, công cụ vật chất để tác động vào đối tượng.",
+    tag: "Sai định nghĩa thực tiễn",
+  },
+  {
+    id: "claim-10",
+    text: "Thực tiễn tồn tại dưới nhiều hình thức đa dạng, trong đó hoạt động sản xuất vật chất đóng vai trò là hình thức cơ bản nhất, quan trọng nhất và có sớm nhất, bởi nó là phương thức tồn tại tất yếu giúp con người cải biến tự nhiên để duy trì sự sống và là tiền đề cho mọi hoạt động khác của xã hội.",
+    originText: "Thực tiễn tồn tại dưới nhiều hình thức khác nhau, ở những lĩnh vực khác nhau, nhưng gồm những hình thức cơ bản sau: hoạt động sản xuất vật chất; hoạt động chính trị - xã hội và hoạt động thực nghiệm khoa học; trong đó, hoạt động sản xuất vật chất là hình thức thực tiễn có sớm nhất, cơ bản nhất, quan trọng nhất, vì ngay từ khi con người mới xuất hiện trên trái đất đã phải tiến hành sản xuất vật chất dù là giản đơn để tồn tại. Sản xuất vật chất biểu thị mối quan hệ của con người với tự nhiên và là phương thức tồn tại cơ bản của con người và xã hội loài người. Không có sản xuất vật chất, con người và xã hội loài người không thể tồn tại và phát triển. Sản xuất vật chất còn là cơ sở cho sự tồn tại của các hình thức thực tiễn khác cũng như tất cả các hoạt động sống khác của con người.",
+    originCitation: "trang 269, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
+    answer: "pass",
+    label: "Đạt",
+    why: "",
+    fix: "",
+    tag: "Đúng hình thức thực tiễn",
+  }
 ];
 
 export const THEORY = {
