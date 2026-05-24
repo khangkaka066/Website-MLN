@@ -9,6 +9,7 @@ import { FiveStepsStepper } from "./components/FiveStepsStepper";
 import { ApplyStepsWalkthrough } from "./components/ApplyStepsWalkthrough";
 import { BeforeAfterComparison } from "./components/BeforeAfterComparison";
 import { ThankYouFooter } from "./components/ThankYouFooter";
+import PlayPage from "./pages/PlayPage";
 
 const TOASTER_OPTIONS = {
   classNames: {
@@ -41,6 +42,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/play" element={<PlayPage />} />
         </Routes>
       </BrowserRouter>
     </div>
