@@ -1,233 +1,264 @@
-from fastapi import FastAPI, APIRouter, HTTPException
-from dotenv import load_dotenv
-from starlette.middleware.cors import CORSMiddleware
-# XÓA IMPORT MONGODB: from motor.motor_asyncio import AsyncIOMotorClient
-# THÊM IMPORT SUPABASE:
-from supabase import create_client, Client
-import os
-import logging
-from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import Dict, List, Literal, Any
-import uuid
-from datetime import datetime, timezone
-# XÓA IMPORT MONGODB: from pymongo.server_api import ServerApi
+const express = require('express');
+const cors = require('cors');
+const { MongoClient } = require('mongodb');
+const { v4: uuidv4 } = require('uuid');
+require('dotenv').config();
 
-ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-# ==============================
-# KẾT NỐI DATABASE (THAY THẾ PHẦN NÀY)
-# ==============================
-# MongoDB cũ:
-# mongo_url: str = os.environ['MONGO_URL']
-# client: AsyncIOMotorClient = AsyncIOMotorClient(mongo_url, server_api=ServerApi('1'), tlsCAFile=certifi.where())
-# db = client[os.environ['DB_NAME']]
+// ==============================
+// 1. Cấu hình Middleware & CORS
+// ==============================
+app.use(express.json());
+app.use(cors({
+  origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*',
+  credentials: true,
+  methods: ["*"],
+  allowedHeaders: ["*"]
+}));
 
-# Supabase mới:
-SUPABASE_URL = "https://fayfdikejlmjfdkgvvhc.supabase.co"
-SUPABASE_KEY = "sb_secret_hYIB7DX70oHWX8LDoT_NhA_j2NEFAJ7" 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-# Lưu ý: Supabase không có khái niệm 'db' object chung, ta gọi trực tiếp supabase.table()
+// ==============================
+// 2. Kết nối MongoDB
+// ==============================
+const mongoUrl = process.env.MONGO_URL;
+const dbName = process.env.DB_NAME || 'MLN'; // Mặc định là MLN nếu không có biến môi trường
+let db;
+let client;
 
-# Create the main app without a prefix
-app: FastAPI = FastAPI(title="AI Verification Card API")
-
-# Create a router with the /api prefix
-api_router: APIRouter = APIRouter(prefix="/api")
-
-@app.get("/")
-async def root():
-    return {"message": "AI Verification Card API is running"}
-
-# ==============================
-# Models (GIỮ NGUYÊN)
-# ==============================
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
-# LƯU Ý: Phần Status check dưới đây vẫn đang dùng cú pháp MongoDB (db.status_checks).
-# Nếu bạn không dùng tính năng này nữa, hãy để nguyên hoặc xóa. 
-# Để code chạy được với Supabase, bạn cần tạo bảng status_checks tương tự trong Supabase.
-# Tạm thời mình giữ nguyên để bạn thấy cấu trúc, nhưng nó sẽ lỗi nếu chưa tạo bảng Supabase.
-
-@api_router.get("/")
-async def root_router() -> Dict[str, str]:
-    return {"message": "AI Verification Card API is running"}
-
-# ==============================
-# AI Verification Quiz game (SỬA CÚ PHÁP TRUY VẤN)
-# ==============================
-ALLOWED_CHOICE = ("pass", "verify")
-
-class GameAnswer(BaseModel):
-    claim_id: str = Field(..., min_length=1, max_length=64)
-    choice: Literal["pass", "verify"]
-    correct: bool
-
-class GameSubmission(BaseModel):
-    model_config = ConfigDict(extra="ignore")
-    session_id: str = Field(..., min_length=8, max_length=64)
-    answers: List[GameAnswer] = Field(..., min_length=1, max_length=50)
-    score: int = Field(..., ge=0, le=10000)
-    total: int = Field(..., gt=0, le=50)
-
-class GameSubmitResponse(BaseModel):
-    ok: bool
-    submission_id: str
-    correct_count: int
-    duplicate: bool = False
-
-class ClaimStat(BaseModel):
-    claim_id: str
-    total: int
-    pass_count: int
-    verify_count: int
-    pass_pct: float
-    verify_pct: float
-    correct_pct: float
-
-class GameStatsResponse(BaseModel):
-    total_players: int
-    average_score: float
-    average_correct_pct: float
-    claim_stats: List[ClaimStat]
-    updated_at: str
-
-
-@api_router.post("/game/submit", response_model=GameSubmitResponse)
-async def submit_game(payload: GameSubmission) -> GameSubmitResponse:
-    """Submit an anonymous game result."""
+async function connectDB() {
+  try {
+    client = new MongoClient(mongoUrl);
+    await client.connect();
+    db = client.db(dbName);
+    console.log("✅ Connected to MongoDB");
     
-    # SỬA: Thay db.game_results.find_one bằng Supabase select
-    existing = supabase.table("game_results").select("id").eq("session_id", payload.session_id).execute()
-    
-    if existing.data:
-        return GameSubmitResponse(
-            ok=True,
-            submission_id=str(existing.data[0]['id']),
-            correct_count=0,
-            duplicate=True,
-        )
+    // Tạo index cho session_id để đảm bảo tính duy nhất (tương tự on_startup trong Python)
+    await db.collection('game_results').createIndex({ "session_id": 1 }, { unique: true });
+    await db.collection('game_results').createIndex({ "submitted_at": 1 });
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1);
+  }
+}
+connectDB();
 
-    correct_count = sum(1 for a in payload.answers if a.correct)
-    
-    # SỬA: Thay db.game_results.insert_one bằng Supabase insert
-    data_to_insert = {
-        "session_id": payload.session_id,
-        "answers": [a.dict() for a in payload.answers],
-        "score": int(payload.score),
-        "total_questions": int(payload.total), # Đổi tên field cho khớp SQL
-        "correct_count": correct_count,
-        "submitted_at": datetime.now(timezone.utc).isoformat(),
+// ==============================
+// 3. Định nghĩa Routes
+// ==============================
+
+// Root check
+app.get('/', (req, res) => {
+  res.json({ message: "AI Verification Card API is running" });
+});
+
+app.get('/api', (req, res) => {
+  res.json({ message: "AI Verification Card API is running" });
+});
+
+// --- Status Check (Legacy) ---
+app.post('/api/status', async (req, res) => {
+  try {
+    const { client_name } = req.body;
+    const statusObj = {
+      id: uuidv4(),
+      client_name,
+      timestamp: new Date().toISOString()
+    };
+    await db.collection('status_checks').insertOne(statusObj);
+    res.json(statusObj);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/status', async (req, res) => {
+  try {
+    const checks = await db.collection('status_checks').find({}, { projection: { _id: 0 } }).limit(1000).toArray();
+    res.json(checks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// --- AI Verification Quiz Game ---
+
+// Helper: Kiểm tra choice hợp lệ
+const ALLOWED_CHOICE = ["pass", "verify"];
+
+// POST /api/game/submit
+app.post('/api/game/submit', async (req, res) => {
+  try {
+    const { session_id, answers, score, total } = req.body;
+
+    // Validate cơ bản (giống Pydantic trong Python)
+    if (!session_id || session_id.length < 8) {
+      return res.status(400).json({ error: "Invalid session_id" });
     }
-    
-    result = supabase.table("game_results").insert(data_to_insert).execute()
-    
-    # Supabase tự trả về ID vừa tạo
-    new_id = result.data[0]['id'] if result.data else ""
 
-    return GameSubmitResponse(
-        ok=True,
-        submission_id=str(new_id),
-        correct_count=correct_count,
-        duplicate=False,
-    )
+    // 1. Kiểm tra trùng lặp session_id (Idempotency)
+    const existing = await db.collection('game_results').findOne(
+      { session_id: session_id },
+      { projection: { _id: 0, submission_id: 1 } }
+    );
 
+    if (existing) {
+      return res.json({
+        ok: true,
+        submission_id: existing.submission_id,
+        correct_count: 0,
+        duplicate: true
+      });
+    }
 
-@api_router.get("/game/stats", response_model=GameStatsResponse)
-async def get_game_stats() -> GameStatsResponse:
-    """Return aggregated, fully anonymous statistics."""
-    
-    # SỬA: Thay db.game_results.count_documents bằng Supabase count
-    count_result = supabase.table("game_results").select("*", count="exact").execute()
-    total_players = count_result.count if count_result.count else 0
+    // 2. Tính số câu đúng
+    const correct_count = answers.filter(a => a.correct).length;
 
-    if total_players == 0:
-        return GameStatsResponse(
-            total_players=0,
-            average_score=0.0,
-            average_correct_pct=0.0,
-            claim_stats=[],
-            updated_at=datetime.now(timezone.utc).isoformat(),
-        )
+    // 3. Tạo document để lưu
+    const submission_id = uuidv4();
+    const doc = {
+      submission_id: submission_id,
+      session_id: session_id,
+      answers: answers,
+      score: parseInt(score),
+      total: parseInt(total),
+      correct_count: correct_count,
+      submitted_at: new Date().toISOString()
+    };
 
-    # SỬA: Supabase khó aggregate phức tạp như Mongo, ta pull data về rồi tính bằng Python (như code mẫu trước)
-    all_results = supabase.table("game_results").select("score, correct_count, total_questions, answers").execute()
-    data = all_results.data
+    // 4. Insert vào DB
+    await db.collection('game_results').insertOne(doc);
 
-    total_score = 0
-    total_correct_pct_sum = 0
-    claim_map: Dict[str, Dict[str, int]] = {}
+    res.json({
+      ok: true,
+      submission_id: submission_id,
+      correct_count: correct_count,
+      duplicate: false
+    });
 
-    for row in data:
-        total_score += row['score']
-        if row['total_questions'] > 0:
-            total_correct_pct_sum += (row['correct_count'] / row['total_questions']) * 100
-        
-        answers = row.get('answers', [])
-        for ans in answers:
-            cid = ans['claim_id']
-            if cid not in claim_map:
-                claim_map[cid] = {"total": 0, "pass": 0, "verify": 0, "correct": 0}
-            
-            stat = claim_map[cid]
-            stat["total"] += 1
-            if ans['choice'] == 'pass': stat["pass"] += 1
-            else: stat["verify"] += 1
-            if ans['correct']: stat["correct"] += 1
+  } catch (err) {
+    // Xử lý lỗi trùng lặp unique index nếu race condition xảy ra
+    if (err.code === 11000) {
+       return res.json({ ok: true, submission_id: "", correct_count: 0, duplicate: true });
+    }
+    console.error("Submit error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
-    avg_score = total_score / total_players
-    avg_correct_pct = total_correct_pct_sum / total_players
+// GET /api/game/stats
+app.get('/api/game/stats', async (req, res) => {
+  try {
+    // 1. Đếm tổng số người chơi
+    const total_players = await db.collection('game_results').countDocuments();
 
-    claim_stats: List[ClaimStat] = []
-    for cid, stats in claim_map.items():
-        total = stats["total"]
-        claim_stats.append(
-            ClaimStat(
-                claim_id=cid,
-                total=total,
-                pass_count=stats["pass"],
-                verify_count=stats["verify"],
-                pass_pct=(stats["pass"] / total) * 100 if total else 0.0,
-                verify_pct=(stats["verify"] / total) * 100 if total else 0.0,
-                correct_pct=(stats["correct"] / total) * 100 if total else 0.0,
-            )
-        )
+    if (total_players === 0) {
+      return res.json({
+        total_players: 0,
+        average_score: 0.0,
+        average_correct_pct: 0.0,
+        claim_stats: [],
+        updated_at: new Date().toISOString()
+      });
+    }
 
-    claim_stats.sort(key=lambda c: c.claim_id)
+    // 2. Aggregate tính điểm trung bình
+    const overallPipeline = [
+      {
+        $project: {
+          score: 1,
+          total: 1,
+          correct_count: 1,
+          correct_pct: {
+            $cond: [
+              { $gt: ["$total", 0] },
+              { $multiply: [{ $divide: ["$correct_count", "$total"] }, 100] },
+              0
+            ]
+          }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          avg_score: { $avg: "$score" },
+          avg_correct_pct: { $avg: "$correct_pct" }
+        }
+      }
+    ];
 
-    return GameStatsResponse(
-        total_players=int(total_players),
-        average_score=round(avg_score, 2),
-        average_correct_pct=round(avg_correct_pct, 1),
-        claim_stats=claim_stats,
-        updated_at=datetime.now(timezone.utc).isoformat(),
-    )
+    const overallResult = await db.collection('game_results').aggregate(overallPipeline).toArray();
+    const avg_score = overallResult.length > 0 ? overallResult[0].avg_score : 0.0;
+    const avg_correct_pct = overallResult.length > 0 ? overallResult[0].avg_correct_pct : 0.0;
 
+    // 3. Aggregate thống kê từng câu hỏi (claim)
+    const claimPipeline = [
+      { $unwind: "$answers" },
+      {
+        $group: {
+          _id: "$answers.claim_id",
+          total: { $sum: 1 },
+          pass_count: {
+            $sum: { $cond: [{ $eq: ["$answers.choice", "pass"] }, 1, 0] }
+          },
+          verify_count: {
+            $sum: { $cond: [{ $eq: ["$answers.choice", "verify"] }, 1, 0] }
+          },
+          correct_count: {
+            $sum: { $cond: ["$answers.correct", 1, 0] }
+          }
+        }
+      }
+    ];
 
-# Include the router in the main app
-app.include_router(api_router)
+    const claimRows = await db.collection('game_results').aggregate(claimPipeline).toArray();
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    const claim_stats = claimRows.map(row => {
+      const total = row.total || 0;
+      return {
+        claim_id: row._id,
+        total: total,
+        pass_count: row.pass_count,
+        verify_count: row.verify_count,
+        pass_pct: total ? Math.round((row.pass_count / total) * 1000) / 10 : 0.0,
+        verify_pct: total ? Math.round((row.verify_count / total) * 1000) / 10 : 0.0,
+        correct_pct: total ? Math.round((row.correct_count / total) * 1000) / 10 : 0.0
+      };
+    });
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger: logging.Logger = logging.getLogger(__name__)
+    // Sắp xếp theo claim_id
+    claim_stats.sort((a, b) => a.claim_id.localeCompare(b.claim_id));
 
-# XÓA PHẦN STARTUP/SHUTDOWN CỦA MONGODB vì Supabase không cần tạo index hay close client theo cách đó
+    res.json({
+      total_players: total_players,
+      average_score: Math.round(avg_score * 100) / 100,
+      average_correct_pct: Math.round(avg_correct_pct * 10) / 10,
+      claim_stats: claim_stats,
+      updated_at: new Date().toISOString()
+    });
+
+  } catch (err) {
+    console.error("Stats error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Admin Reset (Optional)
+app.post('/api/game/_admin/reset', async (req, res) => {
+  const secret = req.query.secret;
+  const expected = process.env.ADMIN_RESET_SECRET;
+  
+  if (!expected || secret !== expected) {
+    return res.status(403).json({ detail: "Forbidden" });
+  }
+  
+  const result = await db.collection('game_results').deleteMany({});
+  res.json({ ok: true, deleted: result.deletedCount });
+});
+
+// ==============================
+// 4. Start Server
+// ==============================
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
