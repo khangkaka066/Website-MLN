@@ -10,6 +10,13 @@ import { ApplyStepsWalkthrough } from "./components/ApplyStepsWalkthrough";
 import { BeforeAfterComparison } from "./components/BeforeAfterComparison";
 import { ThankYouFooter } from "./components/ThankYouFooter";
 
+const TOASTER_OPTIONS = {
+  classNames: {
+    toast:
+      "rounded-xl bg-card text-card-foreground border border-border shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]",
+  },
+};
+
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -23,15 +30,7 @@ const LandingPage = () => {
         <BeforeAfterComparison />
       </main>
       <ThankYouFooter />
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          classNames: {
-            toast:
-              "rounded-xl bg-card text-card-foreground border border-border shadow-[0_10px_30px_-18px_rgba(15,23,42,0.45)]",
-          },
-        }}
-      />
+      <Toaster position="bottom-right" toastOptions={TOASTER_OPTIONS} />
     </div>
   );
 };

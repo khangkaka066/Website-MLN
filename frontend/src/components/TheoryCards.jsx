@@ -56,8 +56,8 @@ export const TheoryCards = () => {
               </p>
               <Separator className="my-5" />
               <ul className="space-y-2.5">
-                {THEORY.practice.bullets.map((b, i) => (
-                  <Bullet key={i}>{b}</Bullet>
+                {THEORY.practice.bullets.map((b) => (
+                  <Bullet key={b}>{b}</Bullet>
                 ))}
               </ul>
               <div className="mt-5 rounded-xl border border-[hsl(174_62%_33%/0.25)] bg-[hsl(174_55%_94%)] p-3">
@@ -87,8 +87,8 @@ export const TheoryCards = () => {
               </p>
               <Separator className="my-5" />
               <ul className="space-y-2.5">
-                {THEORY.truth.bullets.map((b, i) => (
-                  <Bullet key={i}>{b}</Bullet>
+                {THEORY.truth.bullets.map((b) => (
+                  <Bullet key={b}>{b}</Bullet>
                 ))}
               </ul>
               <div className="mt-5 rounded-xl border border-[hsl(24_94%_55%/0.3)] bg-[hsl(24_100%_94%)] p-3">

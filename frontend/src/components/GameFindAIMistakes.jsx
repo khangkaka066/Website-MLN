@@ -30,6 +30,7 @@ const smoothScrollTo = (id) => {
 };
 
 export const GameFindAIMistakes = () => {
+  // GAME_PARAGRAPH is a module-level constant; included for lint-completeness.
   const totalErrors = useMemo(
     () => GAME_PARAGRAPH.filter((s) => s.kind === "error").length,
     []
@@ -135,9 +136,9 @@ export const GameFindAIMistakes = () => {
               </div>
               <div className="mt-5 rounded-xl bg-[hsl(48_100%_97%)] p-4 sm:p-6">
                 <p className="font-mono-doc text-[15px] leading-8 text-foreground sm:text-base">
-                  {GAME_PARAGRAPH.map((seg, idx) => {
+                  {GAME_PARAGRAPH.map((seg) => {
                     if (seg.kind === "text") {
-                      return <span key={idx}>{seg.text}</span>;
+                      return <span key={seg.id}>{seg.text}</span>;
                     }
                     const isFound = found.has(seg.id);
                     const isHint = hintIndex === seg.id;

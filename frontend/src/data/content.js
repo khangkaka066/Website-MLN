@@ -31,7 +31,7 @@ export const NAV_LINKS = [
 // Đoạn văn AI có lỗi cho mini-game.
 // Mỗi phần tử là một segment: text thường (kind: 'text') hoặc đoạn có lỗi (kind: 'error').
 // Khi click vào error → hiển thị giải thích.
-export const GAME_PARAGRAPH = [
+const PARAGRAPH_RAW = [
   { kind: "text", text: "Theo nghiên cứu của " },
   {
     kind: "error",
@@ -94,6 +94,11 @@ export const GAME_PARAGRAPH = [
   },
   { kind: "text", text: "." },
 ];
+
+// Stable id for every segment (text segments get auto-generated ids so React keys are stable).
+export const GAME_PARAGRAPH = PARAGRAPH_RAW.map((seg, idx) =>
+  seg.id ? seg : { ...seg, id: `txt-${idx}` }
+);
 
 export const THEORY = {
   practice: {

@@ -135,6 +135,9 @@ function toast({
 function useToast() {
   const [state, setState] = React.useState(memoryState)
 
+  // setState identity is stable across renders; subscribe once on mount.
+  // Mutable `listeners`/`index` are intentionally not in deps so the
+  // subscription does not churn on every state change.
   React.useEffect(() => {
     listeners.push(setState)
     return () => {
@@ -143,7 +146,8 @@ function useToast() {
         listeners.splice(index, 1)
       }
     };
-  }, [state])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return {
     ...state,

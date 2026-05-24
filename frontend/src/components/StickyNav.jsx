@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Menu, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,35 +10,75 @@ import {
 } from "@/components/ui/sheet";
 import { NAV_LINKS } from "@/data/content";
 
+const OBSERVER_OPTIONS = {
+  rootMargin: "-30% 0px -55% 0px",
+  threshold: [0, 0.25, 0.5, 0.75, 1],
+};
+
 const smoothScrollTo = (id) => {
   const el = document.getElementById(id);
   if (!el) return;
   el.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-export const StickyNav = () => {
+const NavLinkButton = ({ link, active, onClick }) => (
+  <button
+    type="button"
+    data-testid={`nav-${link.id}-link`}
+    onClick={onClick}
+    className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 ${
+      active
+        ? "bg-[hsl(174_55%_92%)] text-[hsl(174_62%_22%)]"
+        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+    }`}
+  >
+    {link.label}
+  </button>
+);
+
+const MobileNavLink = ({ link, active, onClick }) => (
+  <button
+    type="button"
+    data-testid={`nav-mobile-${link.id}-link`}
+    onClick={onClick}
+    className={`rounded-xl px-3 py-2 text-left text-sm font-medium transition-colors ${
+      active
+        ? "bg-[hsl(174_55%_92%)] text-[hsl(174_62%_22%)]"
+        : "text-foreground hover:bg-secondary"
+    }`}
+  >
+    {link.label}
+  </button>
+);
+
+const useScrollSpy = () => {
   const [active, setActive] = useState("hero");
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((l) => document.getElementById(l.id)).filter(
-      Boolean
-    );
+    const sections = NAV_LINKS.map((l) =>
+      document.getElementById(l.id)
+    ).filter(Boolean);
     if (!sections.length) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      {
-        rootMargin: "-30% 0px -55% 0px",
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      }
-    );
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (visible[0]) setActive(visible[0].target.id);
+    }, OBSERVER_OPTIONS);
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
+  }, []);
+
+  return active;
+};
+
+export const StickyNav = () => {
+  const active = useScrollSpy();
+  const [open, setOpen] = useState(false);
+
+  const handleMobileNav = useCallback((id) => {
+    setOpen(false);
+    setTimeout(() => smoothScrollTo(id), 80);
   }, []);
 
   return (
@@ -63,19 +103,12 @@ export const StickyNav = () => {
 
         <nav className="hidden items-center gap-1 md:flex">
           {NAV_LINKS.map((l) => (
-            <button
+            <NavLinkButton
               key={l.id}
-              type="button"
-              data-testid={`nav-${l.id}-link`}
+              link={l}
+              active={active === l.id}
               onClick={() => smoothScrollTo(l.id)}
-              className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 ${
-                active === l.id
-                  ? "bg-[hsl(174_55%_92%)] text-[hsl(174_62%_22%)]"
-                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-              }`}
-            >
-              {l.label}
-            </button>
+            />
           ))}
         </nav>
 
@@ -108,22 +141,12 @@ export const StickyNav = () => {
                 </SheetHeader>
                 <div className="mt-6 flex flex-col gap-1">
                   {NAV_LINKS.map((l) => (
-                    <button
+                    <MobileNavLink
                       key={l.id}
-                      type="button"
-                      data-testid={`nav-mobile-${l.id}-link`}
-                      onClick={() => {
-                        setOpen(false);
-                        setTimeout(() => smoothScrollTo(l.id), 80);
-                      }}
-                      className={`rounded-xl px-3 py-2 text-left text-sm font-medium transition-colors ${
-                        active === l.id
-                          ? "bg-[hsl(174_55%_92%)] text-[hsl(174_62%_22%)]"
-                          : "text-foreground hover:bg-secondary"
-                      }`}
-                    >
-                      {l.label}
-                    </button>
+                      link={l}
+                      active={active === l.id}
+                      onClick={() => handleMobileNav(l.id)}
+                    />
                   ))}
                 </div>
               </SheetContent>

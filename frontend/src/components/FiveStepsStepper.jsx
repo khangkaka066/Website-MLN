@@ -240,7 +240,10 @@ export const FiveStepsStepper = () => {
                 </p>
                 <ul className="mt-2 space-y-2.5">
                   {current.actions.map((a, i) => (
-                    <li key={i} className="flex items-start gap-3 rounded-xl bg-secondary p-3">
+                    <li
+                      key={a}
+                      className="flex items-start gap-3 rounded-xl bg-secondary p-3"
+                    >
                       <span className="inline-flex size-6 shrink-0 items-center justify-center rounded-md bg-card font-mono-doc text-[11px] font-bold text-foreground ring-1 ring-border">
                         {i + 1}
                       </span>
@@ -320,7 +323,7 @@ export const FiveStepsStepper = () => {
                     <ul className="mt-3 space-y-2">
                       {s.actions.map((a, i) => (
                         <li
-                          key={i}
+                          key={a}
                           className="flex items-start gap-2 rounded-lg bg-secondary p-2.5"
                         >
                           <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-md bg-card font-mono-doc text-[10px] font-bold text-foreground ring-1 ring-border">

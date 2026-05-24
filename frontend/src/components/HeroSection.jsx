@@ -98,7 +98,7 @@ export const HeroSection = () => {
             {HERO.bullets.map((b, i) => {
               const Icon = miniCardIcons[i % miniCardIcons.length];
               return (
-                <StaggerItem key={i}>
+                <StaggerItem key={b}>
                   <Card className="flex items-start gap-3 rounded-2xl border-border bg-card p-4 shadow-[0_10px_30px_-22px_rgba(15,23,42,0.35)] transition-shadow hover:shadow-[0_16px_40px_-22px_rgba(15,23,42,0.45)]">
                     <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-[hsl(205_90%_93%)] text-[hsl(205_90%_35%)] ring-1 ring-border">
                       <Icon className="size-5" strokeWidth={2} />
@@ -137,21 +137,21 @@ export const HeroSection = () => {
               </p>
               <ul className="mt-5 space-y-3">
                 {[
-                  { t: "Giải ảo & Kiểm tra Nguồn", c: "hsl(205 90% 45%)" },
-                  { t: "Định vị bối cảnh & Xác minh", c: "hsl(174 62% 33%)" },
-                  { t: "Đối chiếu khách quan & Bias", c: "hsl(24 94% 55%)" },
-                  { t: "Kiểm chứng qua Thực tiễn", c: "hsl(152 60% 35%)" },
-                  { t: "Biện chứng & Quyết định", c: "hsl(222 47% 11%)" },
-                ].map((s, i) => (
+                  { n: 1, t: "Giải ảo & Kiểm tra Nguồn", c: "hsl(205 90% 45%)" },
+                  { n: 2, t: "Định vị bối cảnh & Xác minh", c: "hsl(174 62% 33%)" },
+                  { n: 3, t: "Đối chiếu khách quan & Bias", c: "hsl(24 94% 55%)" },
+                  { n: 4, t: "Kiểm chứng qua Thực tiễn", c: "hsl(152 60% 35%)" },
+                  { n: 5, t: "Biện chứng & Quyết định", c: "hsl(222 47% 11%)" },
+                ].map((s) => (
                   <li
-                    key={i}
+                    key={s.t}
                     className="flex items-center gap-3 rounded-xl bg-secondary px-3 py-2"
                   >
                     <span
                       className="inline-flex size-7 shrink-0 items-center justify-center rounded-lg font-mono-doc text-xs font-bold text-white"
                       style={{ background: s.c }}
                     >
-                      0{i + 1}
+                      {String(s.n).padStart(2, "0")}
                     </span>
                     <span className="text-sm font-medium text-foreground">
                       {s.t}

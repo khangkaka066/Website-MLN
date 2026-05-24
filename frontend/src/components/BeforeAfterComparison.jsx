@@ -69,9 +69,9 @@ export const BeforeAfterComparison = () => {
                   Vấn đề
                 </p>
                 <ul className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  {BEFORE_AFTER.before.issues.map((s, i) => (
+                  {BEFORE_AFTER.before.issues.map((s) => (
                     <li
-                      key={i}
+                      key={s}
                       className="flex items-start gap-2 rounded-lg bg-card p-2.5 ring-1 ring-[hsl(0_72%_52%/0.12)]"
                     >
                       <XCircle
@@ -120,9 +120,9 @@ export const BeforeAfterComparison = () => {
                   Ưu điểm
                 </p>
                 <ul className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  {BEFORE_AFTER.after.wins.map((s, i) => (
+                  {BEFORE_AFTER.after.wins.map((s) => (
                     <li
-                      key={i}
+                      key={s}
                       className="flex items-start gap-2 rounded-lg bg-card p-2.5 ring-1 ring-[hsl(152_60%_35%/0.12)]"
                     >
                       <CheckCircle2
