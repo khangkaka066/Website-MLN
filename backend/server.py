@@ -10,14 +10,19 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import Dict, List, Literal, Any
 import uuid
 from datetime import datetime, timezone
-
+from pymongo.server_api import ServerApi
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
 mongo_url: str = os.environ['MONGO_URL']
-client: AsyncIOMotorClient = AsyncIOMotorClient(mongo_url,  tlsCAFile=certifi.where(), tlsAllowInvalidCertificates=True)
+client: AsyncIOMotorClient = AsyncIOMotorClient(
+                                                mongo_url,  
+                                                server_api=ServerApi('1'),
+                                                tlsCAFile=certifi.where(), 
+                                                serverSelectionTimeoutMS=5000
+                                                )
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
