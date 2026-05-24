@@ -15,7 +15,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { GAME_INTRO, GAME_CLAIMS } from "@/data/content";
 import { RevealOnScroll } from "./RevealOnScroll";
@@ -450,6 +450,10 @@ const RevealDialog = ({ open, payload, onNext, isLast }) => (
     >
       {payload && (
         <>
+          <DialogTitle className="sr-only">
+            {payload.correct ? "Chính xác" : "Chưa đúng"} — Đáp án: {payload.correctLabel}
+          </DialogTitle>
+          <DialogDescription className="sr-only">{payload.why}</DialogDescription>
           <div className="flex items-center gap-2">
             {payload.correct ? (
               <Badge className="rounded-full border-0 bg-[hsl(152_55%_92%)] text-[hsl(152_60%_22%)] hover:bg-[hsl(152_55%_92%)]">
