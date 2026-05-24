@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
+import certifi
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
@@ -16,7 +17,7 @@ load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
 mongo_url: str = os.environ['MONGO_URL']
-client: AsyncIOMotorClient = AsyncIOMotorClient(mongo_url)
+client: AsyncIOMotorClient = AsyncIOMotorClient(mongo_url,  tlsCAFile=certifi.where())
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
