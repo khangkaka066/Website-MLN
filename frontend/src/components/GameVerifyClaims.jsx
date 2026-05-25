@@ -97,8 +97,8 @@ const StatsSummary = ({ stats, loadingStats }) => {
 
     if (chartInstance.current) chartInstance.current.destroy();
 
-    const labels = stats.claim_stats.map((c) =>
-      c.claim_id.replace("claim-", "C")
+    const labels = stats.claim_stats.map((c, index) => 
+      `C${index + 1}`
     );
     const values = stats.claim_stats.map((c) => c.correct_pct);
     const colors = values.map((v) =>
