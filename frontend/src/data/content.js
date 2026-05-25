@@ -254,7 +254,7 @@ export const STEPS = [
 export const APPLY_CLAIM = {
   text:
     "Triết học Mác - Lênin cho rằng thế giới vật chất là sản phẩm do ý thức con người tạo ra, và có những sự vật, hiện tượng tồn tại khách quan mà con người vĩnh viễn không bao giờ có khả năng nhận thức được.",
-  label: "Câu khẳng định mẫu (từ game)",
+  label: "Lấy từ game phía trên",
 };
 
 export const APPLY_STEPS = [
