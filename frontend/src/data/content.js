@@ -44,18 +44,6 @@ export const GAME_INTRO = {
 
 export const GAME_CLAIMS = [
   {
-    id: "claim-0",
-    text:
-      "Sinh viên dùng AI sẽ tăng 300% hiệu quả học tập (Nguyễn, 2024).",
-    answer: "verify", // 'pass' | 'verify'
-    label: "Cần kiểm chứng",
-    why:
-      "Số liệu “300%” quá tròn trịa và rất lớn; tên tác giả “Nguyễn, 2024” mơ hồ, không có tên đầy đủ, không có nơi đăng. Đây là một “ảo giác có vẻ học thuật” điển hình.",
-    fix:
-      "Yêu cầu nguồn cụ thể: tên đầy đủ tác giả, tên tạp chí, DOI, mẫu nghiên cứu n=? Không có → không dùng.",
-    tag: "Số liệu phóng đại",
-  },
-  {
     id: "claim-1",
     text: "Triết học Mác - Lênin cho rằng thế giới vật chất là sản phẩm do ý thức con người tạo ra, và có những sự vật, hiện tượng tồn tại khách quan mà con người vĩnh viễn không bao giờ có khả năng nhận thức được.",
     originText: "Triết học Mác - Lênin thừa nhận sự tồn tại khách quan của thế giới và cho rằng thế giới khách quan là đối tượng của nhận thức. Không phải ý thức của con người sản sinh ra thế giới mà thế giới vật chất tồn tại độc lập với con người, đó là nguồn gốc “duy nhất và cuối cùng” của nhận thức. Triết học Mác - Lênin khẳng định khả năng nhận thức thế giới của con người. V.I. Lênin đã chỉ rõ chỉ có những cái mà con người chưa biết chứ không có cái gì không thể biết: “Dứt khoát là không có và không thể có bất kỳ sự khác nhau nào về nguyên tắc giữa hiện tượng và vật tự nó. Chỉ có sự khác nhau giữa cái đã được nhận thức và cái chưa được nhận thức",
