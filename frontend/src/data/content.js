@@ -253,7 +253,7 @@ export const STEPS = [
 // Apply 5 Steps — walkthrough on claim #1 ("300% hiệu quả học tập")
 export const APPLY_CLAIM = {
   text:
-    "Sinh viên dùng AI sẽ tăng 300% hiệu quả học tập (Nguyễn, 2024).",
+    "Triết học Mác - Lênin cho rằng thế giới vật chất là sản phẩm do ý thức con người tạo ra, và có những sự vật, hiện tượng tồn tại khách quan mà con người vĩnh viễn không bao giờ có khả năng nhận thức được.",
   label: "Câu khẳng định mẫu (từ game)",
 };
 
