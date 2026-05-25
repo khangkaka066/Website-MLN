@@ -717,10 +717,6 @@ export const GameVerifyClaims = () => {
                })}
              </div>
            </div>
-        ) : (
-          <p className="mt-3 text-[10px] text-muted-foreground italic">
-             Chưa có đủ dữ liệu chi tiết cho từng câu hỏi.
-          </p>
         )}
       </div>
     );
