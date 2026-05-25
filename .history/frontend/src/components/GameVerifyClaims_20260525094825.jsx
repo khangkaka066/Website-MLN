@@ -580,17 +580,12 @@ export const GameVerifyClaims = () => {
     const getStats = async () => {
       try {
         const data = await fetchGameStats();
-        if (isMounted) {
-          if (data) {
-            setStats(data);
-          } else {
-            // Nếu data null nhưng không có exception, ta vẫn tắt loading để hiển thị trạng thái "Không có dữ liệu"
-            // Hoặc giữ nguyên stats null để StatsSummary hiện lỗi đỏ
-          }
+        if (isMounted && data) {
+          setStats(data);
           setLoadingStats(false);
         }
       } catch (error) {
-        console.error("Lỗi trong useEffect:", error);
+        console.error(error);
         if (isMounted) setLoadingStats(false);
       }
     };
@@ -667,7 +662,8 @@ export const GameVerifyClaims = () => {
   const handleReplay = () => {
     handleStart();
   };
-  const StatsSummary = () => {
+  
+    const StatsSummary = () => {
     // 1. Hiển thị khi đang tải dữ liệu
     if (loadingStats) {
       return (

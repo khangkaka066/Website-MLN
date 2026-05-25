@@ -667,7 +667,8 @@ export const GameVerifyClaims = () => {
   const handleReplay = () => {
     handleStart();
   };
-  const StatsSummary = () => {
+  
+    const StatsSummary = () => {
     // 1. Hiển thị khi đang tải dữ liệu
     if (loadingStats) {
       return (

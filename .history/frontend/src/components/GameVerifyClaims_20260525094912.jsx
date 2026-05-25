@@ -603,7 +603,6 @@ export const GameVerifyClaims = () => {
       clearInterval(intervalId);
     };
   }, []); 
-
   const claim = useMemo(() => GAME_CLAIMS[index], [index]);
 
   const handleStart = () => {
@@ -667,7 +666,8 @@ export const GameVerifyClaims = () => {
   const handleReplay = () => {
     handleStart();
   };
-  const StatsSummary = () => {
+  
+    const StatsSummary = () => {
     // 1. Hiển thị khi đang tải dữ liệu
     if (loadingStats) {
       return (
