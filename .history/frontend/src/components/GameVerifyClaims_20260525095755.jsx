@@ -667,27 +667,7 @@ export const GameVerifyClaims = () => {
   const handleReplay = () => {
     handleStart();
   };
-  const StatsSummary = () => {
-    if (loadingStats) return <p className="text-xs text-muted-foreground">Đang kết nối...</p>;
-
-    // Debug: Hiển thị toàn bộ dữ liệu thô nếu có
-    if (stats) {
-      return (
-        <div className="rounded-xl bg-black p-3 text-xs text-green-400 font-mono overflow-auto max-h-[300px]">
-          <p className="text-white font-bold mb-2">DEBUG DATA FROM BACKEND:</p>
-          <pre>{JSON.stringify(stats, null, 2)}</pre>
-        </div>
-      );
-    }
-
-    // Nếu không có stats
-    return (
-      <div className="p-3 text-xs text-red-500 bg-red-50 rounded-xl border border-red-100">
-        <p>⚠️ Không nhận được dữ liệu.</p>
-        <p>Hãy kiểm tra tab Network xem request 'stats' bị lỗi gì.</p>
-      </div>
-    );
-  };
+  
 
   return (
     <section

@@ -666,8 +666,7 @@ export const GameVerifyClaims = () => {
 
   const handleReplay = () => {
     handleStart();
-  };
-  const StatsSummary = () => {
+  };const StatsSummary = () => {
     if (loadingStats) return <p className="text-xs text-muted-foreground">Đang kết nối...</p>;
 
     // Debug: Hiển thị toàn bộ dữ liệu thô nếu có
