@@ -67,9 +67,9 @@ export const GAME_CLAIMS = [
   },
   {
     id: "claim-6",
-    text: "Theo quan điểm của triết học Mác - Lênin, tri thức con người có thể phản ánh đúng hoặc sai hiện thực, nhưng ta không thể dùng chính tri thức, sự hiển nhiên, ý kiến số đông hay sự hữu ích để kiểm chứng nó. Thay vào đó, thực tiễn là tiêu chuẩn khách quan duy nhất để kiểm tra và chứng minh chân lý, bởi vì chỉ có thông qua hoạt động thực tiễn, những tư tưởng và tri thức mới được vật chất hóa và hiện thực hóa, từ đó giúp con người khẳng định được đâu là chân lý và bác bỏ những nhận thức sai lầm.",
-    originText: "",
-    originCitation: "",
+    text: "Theo triết học Mác - Lênin, thực tiễn là tiêu chuẩn khách quan duy nhất để kiểm chứng chân lý thay vì dựa vào các yếu tố chủ quan hay ý kiến số đông, bởi chỉ qua hoạt động thực tiễn, nhận thức mới được vật chất hóa để khẳng định tính đúng đắn và bác bỏ sai lầm.",
+    originText: "Tri thức của con người là kết quả của quá trình nhận thức, tri thức đó có thể phản ánh đúng hoặc không đúng hiện thực. Không thể lấy tri thức để kiểm tra tri thức, cũng không thể lấy sự hiển nhiên, hay sự tán thành của số đông hoặc sự có lợi, có ích để kiểm tra sự đúng, sai của tri thức. Theo triết học Mác - Lênin, thực tiễn là tiêu chuẩn khách quan duy nhất để kiểm tra chân lý. Dựa vào thực tiễn, người ta có thể chứng minh, kiểm nghiệm chân lý bởi chỉ có thực tiễn mới có thể vật chất hóa được tri thức, hiện thực hóa được tư tưởng, qua đó mới khẳng định được chân lý hoặc phủ định một sai lầm nào đó.",
+    originCitation: "trang 272, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
     answer: "pass",
     label: "Đạt",
     why: "",
