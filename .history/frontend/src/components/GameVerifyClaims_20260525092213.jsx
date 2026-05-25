@@ -55,42 +55,7 @@ const fetchGameStats = async () => {
     return null;
   }
 };
-const submitGameResult = async (score, total, history) => {
-  // Tạo session_id duy nhất cho người dùng
-  let sessionId = localStorage.getItem("mln_session_id");
-  if (!sessionId) {
-    sessionId = "user_" + Math.random().toString(36).substr(2, 9) + "_" + Date.now();
-    localStorage.setItem("mln_session_id", sessionId);
-  }
 
-  const payload = {
-    session_id: sessionId,
-    answers: history.map((h) => ({
-      claim_id: h.id,
-      choice: h.userLabel === "Đạt" ? "pass" : "verify",
-      correct: h.correct,
-    })),
-    score: score,
-    total: total,
-  };
-
-  try {
-    const res = await fetch("https://website-mln.onrender.com/api/game/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    
-    if (!res.ok) throw new Error("Network response was not ok");
-    const data = await res.json();
-    
-    if (!data.duplicate) {
-      toast.success("Điểm số đã được lưu vào hệ thống!");
-    }
-  } catch (error) {
-    console.error("Lỗi khi gửi điểm:", error);
-  }
-};
 // ----- Intro Screen -----
 // ĐÃ XÓA PHẦN HIỂN THỊ QR CODE TRONG NÀY ĐỂ TRÁNH TRÙNG LẶP
 const IntroScreen = ({ onStart }) => (
