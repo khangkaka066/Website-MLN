@@ -637,3 +637,5 @@ export const GameVerifyClaims = () => {
     </section>
   );
 };
+
+export default GameVerifyClaims;
