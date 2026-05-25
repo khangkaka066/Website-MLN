@@ -146,7 +146,7 @@ export const ApplyStepsWalkthrough = () => {
               </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex flex-wrap items-center gap-2">
+                {/* <div className="flex flex-wrap items-center gap-2">
                   <Badge
                     variant="outline"
                     className="rounded-full border-border bg-card"
@@ -161,7 +161,7 @@ export const ApplyStepsWalkthrough = () => {
                     <CheckCircle2 className="mr-1 size-3.5 text-[hsl(152_60%_30%)]" />
                     Giữ lại cái đúng
                   </Badge>
-                </div>
+                </div> */}
                 <div className="flex items-center gap-2">
                   <Button
                     variant="ghost"
