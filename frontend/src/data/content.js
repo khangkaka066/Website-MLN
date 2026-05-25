@@ -315,14 +315,11 @@ export const BEFORE_AFTER = {
     title: "Trước khi dùng 5 bước",
     subtitle: "Bản AI thô — nghe có vẻ chắc nhưng không kiểm chứng được",
     text:
-      "Sinh viên dùng AI sẽ tăng 300% hiệu quả học tập (Nguyễn, 2024). Một nghiên cứu mới nhất của Harvard cũng chỉ ra ChatGPT giúp sinh viên giảm 47,3% thời gian viết luận. Theo arXiv:9999.12345, GPT-5 đã vượt qua bài kiểm tra triết học Mác – Lênin của Đại học Quốc gia Hà Nội với điểm tuyệt đối.",
+      "Triết học Mác Lênin cho rằng thế giới vật chất là sản phẩm do ý thức con người tạo ra, và có những sự vật, hiện tượng tồn tại khách quan mà con người vĩnh viễn không bao giờ có khả năng nhận thức được",
     issues: [
-      "Số 300% phóng đại, tác giả mơ hồ",
-      "“Harvard” quá chung chung, không có paper",
-      "Mã arXiv giả (sai định dạng)",
-      "Không có DOI / link kiểm chứng được",
-      "Mọi mệnh đề đều mang giọng tuyệt đối",
-      "Không có khung đo lường rõ ràng",
+      "Thế giới vật chất là sản phẩm do ý thức con người tạo ra",
+      "Ý thức tạo ra thế giới vật chất",
+      "Có những sự vật con người vĩnh viễn không nhận thức được",
     ],
   },
   after: {
