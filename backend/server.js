@@ -15,7 +15,8 @@ app.use(cors({
   origin: process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : '*',
   credentials: true,
   methods: ["*"],
-  allowedHeaders: ["*"]
+  allowedHeaders: ["*"],
+  origin: "*"
 }));
 
 // ==============================
