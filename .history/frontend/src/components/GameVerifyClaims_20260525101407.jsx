@@ -578,7 +578,6 @@ export const GameVerifyClaims = () => {
     console.log("✅ USE_EFFECT STATS ĐÃ CHẠY!"); 
     let isMounted = true;
 
-
     const getStats = async () => {
       try {
         const data = await fetchGameStats();

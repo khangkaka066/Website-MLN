@@ -575,9 +575,8 @@ export const GameVerifyClaims = () => {
   const [loadingStats, setLoadingStats] = useState(true);
     
   useEffect(() => {
-    console.log("✅ USE_EFFECT STATS ĐÃ CHẠY!"); 
+    c
     let isMounted = true;
-
 
     const getStats = async () => {
       try {
