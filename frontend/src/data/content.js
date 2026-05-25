@@ -262,51 +262,51 @@ export const APPLY_STEPS = [
     n: 1,
     label: "Bước 1: Giải ảo & Nguồn",
     doing:
-      "Đặt nghi vấn với mọi mệnh đề. Hỏi: con số 300% từ đâu ra? Ai là “Nguyễn, 2024”?",
+      "Xác định hệ tư tưởng của mệnh đề.",
     how:
-      "Tìm “Nguyễn 2024 AI student learning effectiveness” trên Google Scholar, Vietnam Journal of Education.",
+      "Đối chiếu mệnh đề với các nguyên lý cơ bản của Triết học Mác - Lênin (về vật chất và ý thức).",
     result:
-      "Không tìm thấy paper nào khớp. Tên tác giả mơ hồ, không có DOI → claim mất gốc.",
+      "Nhận diện mệnh đề mang tính duy tâm và bất khả tri, trái ngược hoàn toàn với nền tảng duy vật biện chứng.",
   },
   {
     n: 2,
     label: "Bước 2: Bối cảnh & Sự kiện",
     doing:
-      "Định vị: “hiệu quả học tập” đo bằng gì? GPA? thời gian? điểm môn nào? bối cảnh nào?",
+      "Định vị các khái niệm bị tráo đổi.",
     how:
-      "Đối chiếu định nghĩa “hiệu quả học tập” trong giáo dục học (Bloom, Hattie). Không có khung đo nào cho ra mức tăng 300% trên diện rộng.",
+      "Phân tích các từ khóa: 'vật tự nó', 'ý thức', 'khả năng nhận thức'. Kiểm tra xem định nghĩa trong câu có khớp với giáo trình chính thống không.",
     result:
-      "Mệnh đề thiếu bối cảnh đo lường → vi phạm tính cụ thể của chân lý.",
+      "Xác định lỗi sai: Câu khẳng định phủ nhận sự tồn tại khách quan và khả năng nhận thức của con người.",
   },
   {
     n: 3,
     label: "Bước 3: Đối chiếu khách quan",
     doing:
-      "Tra chéo với các báo cáo độc lập về AI trong giáo dục.",
+      "Tra chéo với văn bản gốc có thẩm quyền.",
     how:
-      "Đọc OECD AI in Education (2023), UNESCO Generative AI in Education (2023): các báo cáo này chỉ ra cải thiện vài %–vài chục % trong một số nhiệm vụ cụ thể, KHÔNG có 300%.",
+      "Đối chiếu trực tiếp với trang 262, Giáo trình triết học Mác - Lênin (2021), đặc biệt là quan điểm của V.I. Lênin về nhận thức luận.",
     result:
-      "Claim mâu thuẫn với các báo cáo có thẩm quyền → khả năng cao là phóng đại.",
+      "Tìm thấy sự đối lập hoàn toàn (phủ định trực tiếp) giữa claim và tài liệu chuẩn mực.",
   },
   {
     n: 4,
     label: "Bước 4: Thực tiễn & Logic",
     doing:
-      "Đối chiếu với thực tiễn lớp học: có sinh viên dùng AI mà điểm vẫn thấp không?",
+      "Phân tích tính phi lý",
     how:
-      "Hỏi 10–20 bạn cùng lớp. Quan sát: chất lượng học tập phụ thuộc nhiều biến (động cơ, nền tảng, cách dùng), không phải chỉ có/không dùng AI.",
+      "Sử dụng logic của thuyết khả tri: Nếu con người 'vĩnh viễn không thể biết' thì khoa học sẽ không thể tồn tại và phát triển.",
     result:
-      "Thực tiễn cho thấy không thể có mức tăng đồng đều 300%. Logic nhân quả chưa được chứng minh → bác bỏ.",
+      "Mệnh đề tự mâu thuẫn với thực tế phát triển của khoa học và triết học duy vật.",
   },
   {
     n: 5,
     label: "Bước 5: Biện chứng & Quyết định",
     doing:
-      "Phủ định cái sai, giữ cái đúng, viết lại bằng giọng của bạn.",
+      "Phủ định cái sai, khôi phục chân lý.",
     how:
-      "Giữ tinh thần: “AI có thể là công cụ học tập hữu ích, nhưng cần được kiểm chứng.” Loại bỏ số liệu bịa.",
+      "Viết lại câu claim dựa trên việc bác bỏ các ý tưởng sai lệch và khẳng định lại nội dung cốt lõi của chủ nghĩa duy vật biện chứng.",
     result:
-      "Bản viết lại trung thực hơn, có thể đứng vững trước phản biện học thuật.",
+      "Có được bản khẳng định đúng đắn, khoa học, đứng vững trước phản biện học thuật.",
   },
 ];
 
