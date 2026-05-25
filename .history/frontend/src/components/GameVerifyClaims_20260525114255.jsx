@@ -341,7 +341,7 @@ const QuestionScreen = ({
 
 // ----- Result Screen -----
 const ResultScreen = ({ score, total, history, onReplay }) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps 
+   
   useEffect(() => {
     submitGameResult(score, total, history);
   }, []); 
