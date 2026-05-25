@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   QrCode,
   Smartphone,
@@ -20,8 +20,6 @@ import { toast } from "sonner";
 import { GAME_INTRO, GAME_CLAIMS } from "@/data/content";
 import { RevealOnScroll } from "./RevealOnScroll";
 import { SectionParticles } from "./HeroThreeBackground";
-import { Chart, registerables } from "chart.js";
-Chart.register(...registerables);
 
 const scrollTo = (id) => {
   const el = document.getElementById(id);
