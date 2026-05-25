@@ -326,12 +326,12 @@ export const BEFORE_AFTER = {
     title: "Sau khi dùng 5 bước",
     subtitle: "Bản đã kiểm chứng — khiêm tốn hơn, đứng vững hơn",
     text:
-      "Một số nghiên cứu sơ bộ (OECD 2023, UNESCO 2023) ghi nhận AI hỗ trợ học tập có thể cải thiện một số nhiệm vụ cụ thể như tóm tắt, gợi ý dàn ý — với mức độ thay đổi theo bối cảnh, không phải con số đồng đều cho mọi người học. Hiệu quả thực tế phụ thuộc nhiều biến (động cơ, nền tảng, cách dùng) và cần được kiểm chứng qua thực tiễn lớp học, chứ không thể khái quát hoá thành một con số duy nhất.",
+      "Triết học Mác - Lênin thừa nhận sự tồn tại khách quan của thế giới và cho rằng thế giới khách quan là đối tượng của nhận thức. Không phải ý thức của con người sản sinh ra thế giới mà thế giới vật chất tồn tại độc lập với con người, đó là nguồn gốc “duy nhất và cuối cùng” của nhận thức. Triết học Mác - Lênin khẳng định khả năng nhận thức thế giới của con người. V.I. Lênin đã chỉ rõ chỉ có những cái mà con người chưa biết chứ không có cái gì không thể biết: “Dứt khoát là không có và không thể có bất kỳ sự khác nhau nào về nguyên tắc giữa hiện tượng và vật tự nó. Chỉ có sự khác nhau giữa cái đã được nhận thức và cái chưa được nhận thức” (Nguồn: trang 262, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021).",
     wins: [
-      "Mọi mệnh đề có thể tra cứu được hoặc gắn nhãn “sơ bộ”",
-      "Không số liệu bịa, không citation giả",
-      "Tôn trọng tính cụ thể của chân lý",
-      "Đặt thực tiễn lớp học làm chuẩn kiểm chứng",
+      "Thông tin chính xác hoàn toàn theo giáo trình chuẩn của NXB Chính trị quốc gia Sự thật",
+      "Có nguồn trích dẫn rõ ràng, minh bạch (trang 262, năm 2021)",
+      "Khẳng định đúng đắn lập trường duy vật biện chứng về nguồn gốc duy nhất của nhận thức",
+      "Loại bỏ hoàn toàn các số liệu ảo giác và trích dẫn giả mạo của AI",
     ],
   },
 };
