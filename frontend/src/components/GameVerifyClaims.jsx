@@ -97,11 +97,9 @@ const StatsSummary = ({ stats, loadingStats }) => {
 
     if (chartInstance.current) chartInstance.current.destroy();
 
-    const labels = stats.claim_stats.map((c) => {
-      // Lấy con số từ chuỗi "claim-0", ép kiểu số nguyên và cộng 1
-      const num = parseInt(c.claim_id.replace("claim-", ""), 10);
-      return `C${num}`;
-    });
+    const labels = stats.claim_stats.map((c) =>
+      c.claim_id.replace("claim-", "C")
+    );
     const values = stats.claim_stats.map((c) => c.correct_pct);
     const colors = values.map((v) =>
       v >= 75 ? "#1D9E75" : v >= 40 ? "#BA7517" : "#E24B4A"
