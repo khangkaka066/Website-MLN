@@ -66,7 +66,7 @@ export const GAME_CLAIMS = [
     tag: "Sai định nghĩa nhận thức",
   },
   {
-    id: "claim-6",
+    id: "claim-3",
     text: "Theo triết học Mác - Lênin, thực tiễn là tiêu chuẩn khách quan duy nhất để kiểm chứng chân lý thay vì dựa vào các yếu tố chủ quan hay ý kiến số đông, bởi chỉ qua hoạt động thực tiễn, nhận thức mới được vật chất hóa để khẳng định tính đúng đắn và bác bỏ sai lầm.",
     originText: "Tri thức của con người là kết quả của quá trình nhận thức, tri thức đó có thể phản ánh đúng hoặc không đúng hiện thực. Không thể lấy tri thức để kiểm tra tri thức, cũng không thể lấy sự hiển nhiên, hay sự tán thành của số đông hoặc sự có lợi, có ích để kiểm tra sự đúng, sai của tri thức. Theo triết học Mác - Lênin, thực tiễn là tiêu chuẩn khách quan duy nhất để kiểm tra chân lý. Dựa vào thực tiễn, người ta có thể chứng minh, kiểm nghiệm chân lý bởi chỉ có thực tiễn mới có thể vật chất hóa được tri thức, hiện thực hóa được tư tưởng, qua đó mới khẳng định được chân lý hoặc phủ định một sai lầm nào đó.",
     originCitation: "trang 272, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
@@ -77,7 +77,7 @@ export const GAME_CLAIMS = [
     tag: "Đúng vai trò của thực tiễn",
   },
   {
-    id: "claim-3",
+    id: "claim-4",
     text: "Mặc dù là sản phẩm của nhận thức, chân lý mang tính khách quan tuyệt đối vì nó là những tri thức phản ánh chính xác hiện thực đã được thực tiễn kiểm nghiệm, tồn tại độc lập và hoàn toàn không bị chi phối bởi bất kỳ ý muốn hay yếu tố chủ quan nào của con người.",
     originText: "Chân lý là tri thức chứ không phải bản thân hiện thực khách quan, nhưng tri thức đó phải phản ánh đúng hiện thực khách quan và được thực tiễn kiểm nghiệm là đúng. Do đó, theo nghĩa đúng của từ này, chân lý bao giờ cũng là khách quan vì nội dung phản ánh của nó là khách quan, là phù hợp với khách thể của nhận thức. V.I. Lênin nhấn mạnh: “Thừa nhận chân lý khách quan, tức là chân lý không phụ thuộc vào con người và loài người”¹ chỉ phụ thuộc vào thực tại khách quan, không phụ thuộc vào tính đơn giản hay tính chặt chẽ của lôgích, không phụ thuộc vào lợi ích hay sự quy ước, v.v..",
     originCitation: "trang 280, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
@@ -88,7 +88,7 @@ export const GAME_CLAIMS = [
     tag: "Sai định nghĩa chân lý",
   },
   {
-    id: "claim-7",
+    id: "claim-5",
     text: "Hoạt động thực tiễn mang tính lịch sử - xã hội, thể hiện qua việc con người không ngừng đúc kết và truyền lại kinh nghiệm giữa các thế hệ, đồng thời các hoạt động đó luôn chịu sự chi phối và giới hạn bởi những điều kiện lịch sử - xã hội cụ thể của từng giai đoạn phát triển.",
     originText: "Thứ hai, hoạt động thực tiễn là những hoạt động mang tính lịch sử - xã hội của con người; nghĩa là, thực tiễn là hoạt động chỉ diễn ra trong xã hội, với sự tham gia của đông đảo người trong xã hội. Trong hoạt động thực tiễn, con người truyền lại cho nhau những kinh nghiệm từ thế hệ này qua thế hệ khác. Cũng vì vậy, hoạt động thực tiễn luôn bị giới hạn bởi những điều kiện lịch sử - xã hội cụ thể. Đồng thời, thực tiễn có trải qua các giai đoạn lịch sử phát triển cụ thể của nó.",
     originCitation: "trang 267, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
@@ -99,7 +99,7 @@ export const GAME_CLAIMS = [
     tag: "Đúng tính chất thực tiễn",
   },
   {
-    id: "claim-8",
+    id: "claim-6",
     text: "Theo cấu trúc chiều dọc, hoạt động thực tiễn bao gồm ba thành tố cơ bản là mục đích, phương tiện và kết quả; trong đó, mục đích bắt nguồn từ nhu cầu và lợi ích – vốn được hình thành từ các điều kiện khách quan – và kết quả của quá trình này phụ thuộc trực tiếp vào việc lựa chọn mục đích cũng như phương tiện thực hiện phù hợp.",
     originText: "Nếu cắt theo chiều dọc, thực tiễn bao gồm mục đích, phương tiện và kết quả. Mục đích được nảy sinh từ nhu cầu và lợi ích, nhu cầu xét đến cùng được nảy sinh từ điều kiện khách quan. Lợi ích chính là cái thỏa mãn nhu cầu. Để đạt mục đích, trong hoạt động thực tiễn của mình, con người phải lựa chọn phương tiện (công cụ) để thực hiện. Kết quả của hoạt động thực tiễn phụ thuộc vào nhiều nhân tố nhưng trước hết là phụ thuộc vào mục đích đặt ra và phương tiện mà con người sử dụng để thực hiện mục đích.",
     originCitation: "trang 268, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
@@ -110,7 +110,7 @@ export const GAME_CLAIMS = [
     tag: "Hoạt động thực tiễn",
   },
   {
-    id: "claim-9",
+    id: "claim-7",
     text: "Theo quan điểm của triết học Mác - Lênin, chân lý là những tri thức phản ánh phù hợp với hiện thực khách quan và đã được thực tiễn kiểm nghiệm. Khác với các quan điểm triết học trước đó, triết học duy vật biện chứng khẳng định chân lý và quá trình nhận thức chân lý không phải là một trạng thái tĩnh mà là một quá trình liên tục, bởi vì cả sự vật trong thế giới khách quan lẫn khả năng nhận thức của con người đều luôn không ngừng vận động, biến đổi và phát triển.",
     originText: "Chân lý là một vấn đề được đề cập nhiều trong lịch sử triết học, tuy nhiên chưa có đại biểu triết học nào trước và ngoài triết học duy vật biện chứng có quan niệm hoàn chỉnh, đúng đắn về chân lý. Theo quan điểm triết học Mác - Lênin, chân lý là tri thức phù hợp với hiện thực khách quan và được thực tiễn kiểm nghiệm. Chân lý phải được hiểu như một quá trình, bởi lẽ bản thân sự vật có quá trình vận động, biến đổi, phát triển và sự nhận thức về nó cũng phải được vận động, biến đổi, phát triển. Vì vậy, nhận thức chân lý cũng là một quá trình.",
     originCitation: "trang 280 - 281, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
@@ -121,7 +121,7 @@ export const GAME_CLAIMS = [
     tag: "Đúng định nghĩa chân lý",
   },
   {
-    id: "claim-4",
+    id: "claim-8",
     text: "Nhận thức bắt nguồn từ thực tiễn và chỉ thực sự có giá trị khi những tri thức, lý luận đó quay trở lại gắn liền với đời sống để ứng dụng, cải tạo xã hội và phục vụ lợi ích của con người.",
     originText: "Nhận thức của con người ngay từ khi mới xuất hiện trên trái đất đã bị quy định bởi những nhu cầu thực tiễn, bởi lẽ, muốn sống, muốn tồn tại, con người phải sản xuất và cải tạo xã hội. Chính nhu cầu sản xuất vật chất và cải tạo xã hội buộc con người phải nhận thức thế giới xung quanh. Nhận thức của con người là nhằm phục vụ thực tiễn, soi đường, dẫn dắt, chỉ đạo thực tiễn chứ không phải để trang trí hay phục vụ cho những ý tưởng viển vông. Nếu không vì thực tiễn, nhận thức sẽ mất phương hướng, bế tắc. Mọi tri thức khoa học - kết quả của nhận thức chỉ có ý nghĩa khi được áp dụng vào đời sống thực tiễn một cách trực tiếp hay gián tiếp để phục vụ con người.",
     originCitation: "trang 272, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
@@ -132,7 +132,7 @@ export const GAME_CLAIMS = [
     tag: "Sai mục đích nhận thức",
   },
   {
-    id: "claim-5",
+    id: "claim-9",
     text: "Thực tiễn bao hàm toàn bộ mọi hoạt động của con người, bao gồm cả những suy nghĩ, tư duy trừu tượng không cần thông qua công cụ vật chất và không cần làm biến đổi thế giới khách quan.",
     originText: "Thứ nhất, thực tiễn không phải là toàn bộ hoạt động của con người mà chỉ là những hoạt động vật chất - cảm tính, như lời của C. Mác, đó là những hoạt động vật chất của con người cảm giác được; nghĩa là con người có thể quan sát trực quan được các hoạt động vật chất này. Hoạt động vật chất - cảm tính là những hoạt động mà con người phải sử dụng lực lượng vật chất, công cụ vật chất tác động vào các đối tượng vật chất để làm biến đổi chúng. Trên cơ sở đó, con người mới làm biến đổi được thế giới khách quan phục vụ cho mình.",
     originCitation: "trang 267, Giáo trình triết học Mác - Lênin, dành cho hệ không chuyên lý luận chính trị. NXB chính trị quốc gia sự thật, 2021",
