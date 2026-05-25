@@ -100,7 +100,7 @@ const StatsSummary = ({ stats, loadingStats }) => {
     const labels = stats.claim_stats.map((c) => {
       // Lấy con số từ chuỗi "claim-0", ép kiểu số nguyên và cộng 1
       const num = parseInt(c.claim_id.replace("claim-", ""), 10);
-      return `C${num + 1}`;
+      return `C${num}`;
     });
     const values = stats.claim_stats.map((c) => c.correct_pct);
     const colors = values.map((v) =>
