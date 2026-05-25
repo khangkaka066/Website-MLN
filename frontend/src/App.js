@@ -1,6 +1,7 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 import { StickyNav } from "./components/StickyNav";
 import { HeroSection } from "./components/HeroSection";
 import { GameVerifyClaims } from "./components/GameVerifyClaims";
@@ -45,6 +46,7 @@ function App() {
           <Route path="/play" element={<PlayPage />} />
         </Routes>
       </BrowserRouter>
+      <Analytics />
     </div>
   );
 }
